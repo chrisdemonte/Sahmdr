@@ -4,6 +4,7 @@ import Navbar from './components/Navbar.js'
 import MainContent from './components/MainContent.js'
 import HowToPlayContent from './components/HowToPlayContent';
 import StartGameContent from './components/StartGameContent';
+import PickSuitsContent from './components/PickSuitsContent';
 
 function App() {
   
@@ -14,7 +15,7 @@ function App() {
     setLayout(<HowToPlayContent/>)
   }
   const setStartGame = function startGame(){
-    setLayout(<StartGameContent/>)
+    setLayout(<PickSuitsContent/>)
   }
   const setQuitGame = function quitGame(){
     setLayout(<StartGameContent/>)

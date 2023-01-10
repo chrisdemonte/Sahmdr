@@ -24,6 +24,9 @@
 .navbar--options > li:hover {
     color:goldenrod;
 }
+.navbar--options > li:active {
+    color: rgb(218, 97, 32);
+}
 
 .main{
     font-family: 'Signika Negative', sans-serif;
@@ -40,3 +43,59 @@
     font-family: 'Signika', sans-serif;
 
 }
+.pick-suits--content{
+    width: 30%;
+    margin: auto auto;
+}
+.pick-suits--content > h1{
+    text-align: center;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+.suit-button{
+    border-style: solid;
+    border-width: 5px;
+    border-color: antiquewhite;
+    border-radius: 30px;
+    cursor: pointer;
+
+}
+.suit-button:hover{
+    border-color: goldenrod;
+    color: goldenrod;
+
+}
+.suit-button:active{
+    border-color: rgb(218, 97, 32);
+    color: rgb(218, 97, 32);
+
+}
+.suit-button-selected{
+    color: green;
+    border-style: solid;
+    border-width: 5px;
+    border-color: green;
+    border-radius: 30px;
+    cursor: pointer;
+
+}
+.start-game-btn{
+    border-style: solid;
+    border-width: 5px;
+    border-color: antiquewhite;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 15%;
+}
+.start-game-btn:hover{
+    border-color: goldenrod;
+    color: goldenrod;
+}
+.start-game-btn:active{
+    border-color: rgb(218, 97, 32);
+    color: rgb(218, 97, 32);
+
+}
+
