@@ -1,0 +1,42 @@
+.navbar--main{
+    background-color: #274472;
+    color: antiquewhite;
+    display: flex;
+    align-items: center;
+    font-family: 'Signika Negative', sans-serif;
+    padding: 0px 20px 0px 20px;
+}
+.navbar--title{
+    cursor: default;
+}
+.navbar--options{
+    list-style: none;
+    display:inline-flex;
+    margin-left: 60%;
+    width: 40%;
+    
+}
+.navbar--options > li {
+    margin-right: 10%;
+    text-align: right;
+    cursor: pointer;
+}
+.navbar--options > li:hover {
+    color:goldenrod;
+}
+
+.main{
+    font-family: 'Signika Negative', sans-serif;
+    color: antiquewhite;
+    margin-top: 2.5%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+}
+.main--content {
+    padding-left: 5%;
+    padding-right: 5%;
+    font-family: 'Signika', sans-serif;
+
+}
