@@ -1,53 +1,14 @@
 import "../App.css"
 import React from 'react'
-import SuitButton from "./SuitButton.js"
+import PickRoom from "./PickRoom.js";
 
 function PickSuitsContent(props){
-/*
-    const [suits, setSuits] = React.useState(0, )
-    const incSuits = () => {
 
-        setSuits(prev => prev + 1)
-        console.log(suits)
-    }
-    const decSuits = () => {
-
-        setSuits(prev => prev - 1)
-    }
-
-    const selectionStates = []
-    const [swordSelected, setSwordSelected] = React.useState(false)
-    selectionStates.push(React.useState(false))
-    selectionStates.push(React.useState(false))
-    selectionStates.push(React.useState(false))
-    selectionStates.push(React.useState(false))
-    selectionStates.push(React.useState(false))
-
-*/
+    const setLayout = props.setLayout
     var suits = 0;
     var selections = [false,false,false,false,false,false]; 
     var names = ["Swords", "Arrows", "Magic", "Healing", "Defense", "Resistance"]
-    /*
-    const turnSwordsOn = () =>{
-        if (suits < 3){
-            setSuits(prev => prev + 1)
-            setSwordSelected(true)
-            setSwordState(<h1 className="suit-button-selected" onClick={turnSwordsOff}>Swords</h1>)
-            console.log(suits)
-            console.log(swordSelected)
-        }
-        console.log(suits)
-        console.log(swordSelected)
-    }
-    const turnSwordsOff = () =>{
-        if (swordSelected == true){
-            setSuits(prev => prev - 1)
-            setSwordSelected(false)
-            setSwordState(<h1 className="suit-button" onClick={turnSwordsOn}>Swords</h1>)
-        }
-        console.log(suits)
-        console.log(swordSelected)
-    }*/
+
     function toggleSwords(){
         if (selections[0] == true){
             suits--;
@@ -151,7 +112,14 @@ function PickSuitsContent(props){
     const [resistanceState, setResistanceState] = React.useState(<h1 className="suit-button" onClick={toggleResistance}>Resistance</h1>)
 
 
-    //console.log(selectionStates)
+    function startGame(){
+        console.log(suits)
+        if (suits == 3){
+            setLayout(<PickRoom setLayout={setLayout}/>)
+        }
+    }
+
+    const [startGameState, setStartGameState ] = React.useState(<h1 className="start-game-btn" onClick={startGame}>Start Game</h1>)
     
 
     return (
@@ -164,7 +132,7 @@ function PickSuitsContent(props){
                 {healingState}
                 {defenseState}
                 {resistanceState}
-                <h1 className="start-game-btn">Start Game</h1>
+                {startGameState}
             </div>
         </div>
     )
