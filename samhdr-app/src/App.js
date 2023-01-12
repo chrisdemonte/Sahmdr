@@ -2,16 +2,16 @@ import './App.css';
 import React from 'react';
 import Navbar from './components/Navbar.js'
 import MainContent from './components/MainContent.js'
-//import io from 'socket.io'
 
-function App() {
+
+function App(props) {
   
+  const socket = props.socket
   const [testLO, setLayout] = React.useState(<h1 className='main--content'>Welcome to SAMHDR</h1>)
-
 
   return (
     <div className="App">
-      <Navbar setLayout={setLayout}/>
+      <Navbar setLayout={setLayout} socket={socket}/>
       <MainContent content={testLO}/>
     </div>
   );

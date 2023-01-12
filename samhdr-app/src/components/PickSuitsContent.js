@@ -4,9 +4,11 @@ import PickRoom from "./PickRoom.js";
 
 function PickSuitsContent(props){
 
+    const socket = props.socket
     const setLayout = props.setLayout
     var suits = 0;
     var selections = [false,false,false,false,false,false]; 
+    var name = ""
     //var names = ["Swords", "Arrows", "Magic", "Healing", "Defense", "Resistance"]
 
     function toggleSwords(){
@@ -113,18 +115,28 @@ function PickSuitsContent(props){
 
 
     function startGame(){
-        console.log(suits)
+     //   console.log(suits)
+     //   console.log(name)
         if (suits === 3){
-            setLayout(<PickRoom setLayout={setLayout}/>)
+            socket.emit("join-room", name)
+            setLayout(<PickRoom setLayout={setLayout} socket={socket} name={name} selections={selections}/>)
         }
     }
 
     const [startGameState, setStartGameState ] = React.useState(<h1 className="start-game-btn" onClick={startGame}>Start Game</h1>)
     
+    
+    const nameEntryHandler = event =>{
+        name = event.target.value  
+    }
 
     return (
         <div className="main">
             <div className="pick-suits--content">
+                <h1>Enter Your Name:</h1>
+                <input type="text" className="name-entry" onChange={nameEntryHandler}>
+                    
+                </input>
                 <h1>Pick Three Suits:</h1>
                 {swordState}
                 {arrowState}

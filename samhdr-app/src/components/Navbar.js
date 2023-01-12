@@ -4,13 +4,14 @@ import PickSuitsContent from "./PickSuitsContent.js"
 import StartGameContent from "./StartGameContent.js"
 function Navbar(props) {
 
+    const socket = props.socket
     const setLayout = props.setLayout
 
     function setHowToPlay (){
         setLayout(<HowToPlayContent/>)
     }
     function setStartGame (){
-        setLayout(<PickSuitsContent setLayout={setLayout}/>)
+        setLayout(<PickSuitsContent setLayout={setLayout} socket={socket}/>)
     }
     function setQuitGame (){
         setLayout(<StartGameContent/>)

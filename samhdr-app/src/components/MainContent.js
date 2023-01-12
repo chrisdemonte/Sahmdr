@@ -4,6 +4,7 @@ import HowToPlayContent from './HowToPlayContent.js'
 
 function MainContent(props){
     //const [content, setContent] = React.useState(<HowToPlayContent />)
+    //const socket = props.socket
     const content = props.content
 
     return (
