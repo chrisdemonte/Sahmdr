@@ -7,10 +7,10 @@ function PickSuitsContent(props){
     const setLayout = props.setLayout
     var suits = 0;
     var selections = [false,false,false,false,false,false]; 
-    var names = ["Swords", "Arrows", "Magic", "Healing", "Defense", "Resistance"]
+    //var names = ["Swords", "Arrows", "Magic", "Healing", "Defense", "Resistance"]
 
     function toggleSwords(){
-        if (selections[0] == true){
+        if (selections[0] === true){
             suits--;
             selections[0] = false
             setSwordState(<h1 className="suit-button" onClick={toggleSwords}>Swords</h1>)
@@ -27,7 +27,7 @@ function PickSuitsContent(props){
     const [swordState, setSwordState] = React.useState(<h1 className="suit-button" onClick={toggleSwords}>Swords</h1>)
 
     function toggleArrows(){
-        if (selections[1] == true){
+        if (selections[1] === true){
             suits--;
             selections[1] = false
             setArrowState(<h1 className="suit-button" onClick={toggleArrows}>Arrows</h1>)
@@ -44,7 +44,7 @@ function PickSuitsContent(props){
     const [arrowState, setArrowState] = React.useState(<h1 className="suit-button" onClick={toggleArrows}>Arrows</h1>)
 
     function toggleMagic(){
-        if (selections[2] == true){
+        if (selections[2] === true){
             suits--;
             selections[2] = false
             setMagicState(<h1 className="suit-button" onClick={toggleMagic}>Magic</h1>)
@@ -61,7 +61,7 @@ function PickSuitsContent(props){
     const [magicState, setMagicState] = React.useState(<h1 className="suit-button" onClick={toggleMagic}>Magic</h1>)
 
     function toggleHealing(){
-        if (selections[3] == true){
+        if (selections[3] === true){
             suits--;
             selections[3] = false
             setHealingState(<h1 className="suit-button" onClick={toggleHealing}>Healing</h1>)
@@ -78,7 +78,7 @@ function PickSuitsContent(props){
     const [healingState, setHealingState] = React.useState(<h1 className="suit-button" onClick={toggleHealing}>Healing</h1>)
 
     function toggleDefense(){
-        if (selections[4] == true){
+        if (selections[4] === true){
             suits--;
             selections[4] = false
             setDefenseState(<h1 className="suit-button" onClick={toggleDefense}>Defense</h1>)
@@ -95,7 +95,7 @@ function PickSuitsContent(props){
     const [defenseState, setDefenseState] = React.useState(<h1 className="suit-button" onClick={toggleDefense}>Defense</h1>)
 
     function toggleResistance(){
-        if (selections[5] == true){
+        if (selections[5] === true){
             suits--;
             selections[5] = false
             setResistanceState(<h1 className="suit-button" onClick={toggleResistance}>Resistance</h1>)
@@ -114,7 +114,7 @@ function PickSuitsContent(props){
 
     function startGame(){
         console.log(suits)
-        if (suits == 3){
+        if (suits === 3){
             setLayout(<PickRoom setLayout={setLayout}/>)
         }
     }
