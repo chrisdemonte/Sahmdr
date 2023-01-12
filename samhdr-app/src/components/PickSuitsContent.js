@@ -118,8 +118,8 @@ function PickSuitsContent(props){
      //   console.log(suits)
      //   console.log(name)
         if (suits === 3){
-            socket.emit("join-room", name)
-            setLayout(<PickRoom setLayout={setLayout} socket={socket} name={name} selections={selections}/>)
+            //socket.emit("join-room", name)
+            setLayout(<PickRoom setLayout={setLayout} socket={socket} name={name} selections={selections} />)
         }
     }
 
