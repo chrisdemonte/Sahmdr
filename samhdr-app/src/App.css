@@ -211,4 +211,32 @@
     color: rgb(218, 97, 32);
     border-color: rgb(218, 97, 32);
 }
+.playerListItem--accept-challenge{
+    color: rgb(5, 164, 5);
+    cursor: pointer;
+    margin-left: auto;
+   
+}
+.playerListItem--accept-challenge:hover{
+    color: goldenrod;
+    cursor: pointer;
+}
+.playerListItem--accept-challenge:active{
+    color: rgb(218, 97, 32);
+    cursor: pointer;
+}
+.playerListItem--deny-challenge{
+    color: rgb(164, 5, 5);
+    cursor: pointer;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.playerListItem--deny-challenge:hover{
+    color: goldenrod;
+    cursor: pointer;
+}
+.playerListItem--deny-challenge:active{
+    color: rgb(218, 97, 32);
+    cursor: pointer;
+}
 
