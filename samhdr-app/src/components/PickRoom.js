@@ -2,6 +2,7 @@ import '../App.css'
 import React from 'react'
 import PlayerListItem from './PlayerListItem.js'
 import PlayerChallengeItem from './PlayerChallengeItem.js'
+import CardGame from './CardGame.js'
 //import io from 'socket.io-client'
 
 function PickRoom (props){
@@ -13,6 +14,7 @@ function PickRoom (props){
     var challenges = []
     const [challengeState, setChallengeState] = React.useState(<PlayerChallengeItem hasChallenges={false} />)
     var otherPlayers = []
+    var playerListItems = []
     const [roomState, setRoomState] = React.useState(<div></div>)
    // const socket = io('http://localhost:22222')
    // socket.on('success', () => {setRoomState(<div>Successfully Connected to the server</div>)})
@@ -34,18 +36,22 @@ function PickRoom (props){
         otherPlayers = data
         //console.log(otherPlayers.length)
         let rows = []
+        playerListItems = []
         for (let i = 0; i < otherPlayers.length; i++){
             //console.log(i)
             if (otherPlayers[i].name.length > 0){
                 //console.log(otherPlayers[i].name)
                 let pName = otherPlayers[i].name
-                let isReady = otherPlayers[i].ready
+                let challengable = otherPlayers[i].state
                 if (otherPlayers[i].id === socket.id){
-                    isReady = false
+                    challengable = 0
                     pName = pName + " (You)"
                 }
                 //rows.push(<div key={otherPlayers[i].id}>::: {otherPlayers[i].name} ::: Ready to play : {bool} :::</div>)
-                rows.push(<PlayerListItem key={otherPlayers[i].id} pId={otherPlayers[i].id} self={name} name={pName} ready={isReady} socket={socket}/> )
+                //rows.push(<PlayerListItem key={otherPlayers[i].id} pId={otherPlayers[i].id} self={name} name={pName} readyState={challengable} socket={socket}/> )
+                let playerListItem = <PlayerListItem key={otherPlayers[i].id} pId={otherPlayers[i].id} self={name} name={pName} readyState={challengable} socket={socket}/> 
+                playerListItems.push({"id": otherPlayers[i].id, "state": playerListItem})
+                rows.push(playerListItem)
             }
         }
         
@@ -56,7 +62,37 @@ function PickRoom (props){
         console.log("recieved challenge")
         challenges.push({"name": pname, "id": pId})
         if (challenges.length === 1){
-            setChallengeState(<PlayerChallengeItem hasChallenge={true} name={name} pname={pname} socket={socket} pSocketId={pId}/>)
+            setChallengeState(<PlayerChallengeItem hasChallenge={true} name={name} pname={pname} socket={socket} pSocket={pId}/>)
+        }
+    })
+
+    socket.off("challenge-accepted")
+    socket.on("challenge-accepted", (opponentName, opponentID, moveFirst) =>{
+        setLayout(<CardGame socket={socket.id} name={name} pName={opponentName} pSocket={opponentID} moveFirst={moveFirst} setLayout={setLayout}/>)
+    })
+
+    socket.off("challenge-denied")
+    socket.on("challenge-denied", (opponentName, opponentID)=>{
+        let i = 0
+        let rows = []
+        while (i < playerListItems.length){
+            if (opponentID === playerListItems[i].id){
+                playerListItems[i].state = <PlayerListItem key={opponentID} pId={opponentID} self={name} name={opponentName} readyState={1} socket={socket}/>
+            }
+            rows.push(playerListItems[i].state)
+            i++
+        }
+        setChallengeState(rows)
+    })
+    socket.off("remove-challenger")
+    socket.on("remove-challenger", ()=>{
+        challenges.shift()
+        if (challenges.length > 0){
+            setChallengeState(<PlayerChallengeItem hasChallenge={true} name={name} pname={challenges[0].name} socket={socket} pSocket={challenges[0].id}/>)
+        }
+        else {
+            setChallengeState(<PlayerChallengeItem hasChallenge={false} name={name}  pname="" pSocket ="" socket={socket} />)
+        
         }
     })
 

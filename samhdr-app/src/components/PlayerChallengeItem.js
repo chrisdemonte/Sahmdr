@@ -6,13 +6,13 @@ function PlayerChallengeItem(props){
     const pname = props.pname
     const name = props.name
     const socket = props.socket
-    const pSocketId = props.pSocket
+    const pSocket = props.pSocket
 
     function acceptChallenge(){
-        socket.emit("accept-challenge", name, pSocketId)
+        socket.emit("accept-challenge", name, pname, pSocket)
     }
     function denyChallenge(){
-        socket.emit("deny-challenge", name, pSocketId)
+        socket.emit("deny-challenge", name, pname, pSocket)
     }
 
     
