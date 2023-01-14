@@ -1,0 +1,6 @@
+swords: #b00421
+arrows: #ff6003
+magic: #ffb303
+healing: #17ad00
+defense: #034ec7
+resistance: #7836d4
