@@ -11,9 +11,10 @@ function PickRoom (props){
     const setLayout = props.setLayout
     const name = props.name
     const selections = props.selections
-    var challenges = []
+   // var buttonStates = []
     const [challengeState, setChallengeState] = React.useState(<PlayerChallengeItem hasChallenges={false} />)
-    var otherPlayers = []
+   // var players = {}
+   // var keys = []
     var playerListItems = []
     const [roomState, setRoomState] = React.useState(<div></div>)
    // const socket = io('http://localhost:22222')
@@ -23,6 +24,93 @@ function PickRoom (props){
     
        // console.log(socket.listeners("room-data"))
     
+    function generateRoom(players, keys){
+        //let rows = []
+        
+        playerListItems = []
+        let player = null
+        //console.log("GE " + players)
+        //console.log("GR " + keys)
+        for (let i = 0; i < keys.length; i++){
+            //console.log(i)
+            player = players[keys[i]]
+            console.log(player)
+            if (player.name.length > 0){
+                //console.log(players[i].name)
+                let pName = player.name
+                let state = player.state
+                if (keys[i] === socket.id){
+                    state = 0
+                    pName = pName + " (You)"
+                }
+                else if (typeof player.incomingChallenges[socket.id] === "undefined") {
+                    state = player.state
+                }
+                else {
+                    state = 3
+                }
+                console.log(state)
+                //rows.push(<div key={otherPlayers[i].id}>::: {otherPlayers[i].name} ::: Ready to play : {bool} :::</div>)
+                //rows.push(<PlayerListItem key={otherPlayers[i].id} pId={otherPlayers[i].id} self={name} name={pName} readyState={challengable} socket={socket}/> )
+                //let playerListItem = <PlayerListItem key={players[i].id} pId={players[i].id} self={name} name={pName} readyState={challengable} socket={socket}/> 
+                playerListItems.push(<PlayerListItem key={keys[i]} pId={keys[i]} self={name} pName={pName} readyState={state} socket={socket}/> )
+                //rows.push(playerListItem)
+            }
+            else {
+                playerListItems.push(<div key={"blank-player-" + i}></div>)
+            }
+        }
+        
+        setRoomState(playerListItems)
+
+    }
+    function updateChallenges(players){
+                //if (challenges.length === 1){
+        let challengeKeys = players[socket.id].challengeKeys
+        console.log(players[socket.id])
+        console.log(challengeKeys)
+        
+        if (challengeKeys.length > 0){
+            let challenger = players[socket.id].incomingChallenges[challengeKeys[0]]
+            setChallengeState(<PlayerChallengeItem hasChallenge={true} self={name} pName={challenger} socket={socket} pSocket={challengeKeys[0]}/>)
+        }
+        else {
+            setChallengeState(<PlayerChallengeItem hasChallenges={false} />)
+        }
+    }
+    /*
+    function generateRoom(){
+        //let rows = []
+        playerListItems = []
+        let keys = players.keys()
+        
+        for (let i = 0; i < players.length; i++){
+            //console.log(i)
+            if (players[i].name.length > 0){
+                //console.log(players[i].name)
+                let pName = players[i].name
+                let challengable = players[i].state
+                if (players[i].id === socket.id){
+                    challengable = 0
+                    pName = pName + " (You)"
+                }
+                //rows.push(<div key={otherPlayers[i].id}>::: {otherPlayers[i].name} ::: Ready to play : {bool} :::</div>)
+                //rows.push(<PlayerListItem key={otherPlayers[i].id} pId={otherPlayers[i].id} self={name} name={pName} readyState={challengable} socket={socket}/> )
+                //let playerListItem = <PlayerListItem key={players[i].id} pId={players[i].id} self={name} name={pName} readyState={challengable} socket={socket}/> 
+                playerListItems.push(<PlayerListItem key={players[i].id} pId={players[i].id} self={name} name={pName} readyState={challengable} socket={socket}/> )
+                //rows.push(playerListItem)
+            }
+            else {
+                playerListItems.push(<div></div>)
+            }
+        }
+        
+        setRoomState(playerListItems)
+
+    }
+*/
+
+    
     /**
      * The only solution I could come up with to make a single server request that updates the page
      * Every time the page updates a new room-data listener is added, so as part of the callback function
@@ -31,39 +119,22 @@ function PickRoom (props){
      * to refresh with the page
      */
     socket.off("room-data")
-    socket.on("room-data", (data) => {
-        console.log(data)
-        otherPlayers = data
-        //console.log(otherPlayers.length)
-        let rows = []
-        playerListItems = []
-        for (let i = 0; i < otherPlayers.length; i++){
-            //console.log(i)
-            if (otherPlayers[i].name.length > 0){
-                //console.log(otherPlayers[i].name)
-                let pName = otherPlayers[i].name
-                let challengable = otherPlayers[i].state
-                if (otherPlayers[i].id === socket.id){
-                    challengable = 0
-                    pName = pName + " (You)"
-                }
-                //rows.push(<div key={otherPlayers[i].id}>::: {otherPlayers[i].name} ::: Ready to play : {bool} :::</div>)
-                //rows.push(<PlayerListItem key={otherPlayers[i].id} pId={otherPlayers[i].id} self={name} name={pName} readyState={challengable} socket={socket}/> )
-                let playerListItem = <PlayerListItem key={otherPlayers[i].id} pId={otherPlayers[i].id} self={name} name={pName} readyState={challengable} socket={socket}/> 
-                playerListItems.push({"id": otherPlayers[i].id, "state": playerListItem})
-                rows.push(playerListItem)
-            }
-        }
-        
-        setRoomState(rows)
+    socket.on("room-data", (players, keys) => {
+       // console.log("EH " + players)
+       // console.log("EH " + keys)
+      //  players = players
+      //  keys = keys
+        generateRoom(players, keys)
+        updateChallenges(players)
+        //console.log(players.length)
+
     })
+
     socket.off("recieve-challenge")
-    socket.on("recieve-challenge", (pname, pId)=>{
-        console.log("recieved challenge")
-        challenges.push({"name": pname, "id": pId})
-        if (challenges.length === 1){
-            setChallengeState(<PlayerChallengeItem hasChallenge={true} name={name} pname={pname} socket={socket} pSocket={pId}/>)
-        }
+    socket.on("recieve-challenge", (players)=>{
+       // console.log("recieved challenge")
+       // challenges.push({"name": pname, "id": pId})
+        updateChallenges(players)
     })
 
     socket.off("challenge-accepted")
@@ -73,17 +144,9 @@ function PickRoom (props){
 
     socket.off("challenge-denied")
     socket.on("challenge-denied", (opponentName, opponentID)=>{
-        let i = 0
-        let rows = []
-        while (i < playerListItems.length){
-            if (opponentID === playerListItems[i].id){
-                playerListItems[i].state = <PlayerListItem key={opponentID} pId={opponentID} self={name} name={opponentName} readyState={1} socket={socket}/>
-            }
-            rows.push(playerListItems[i].state)
-            i++
-        }
-        setChallengeState(rows)
+        
     })
+    /*
     socket.off("remove-challenger")
     socket.on("remove-challenger", ()=>{
         challenges.shift()
@@ -94,10 +157,11 @@ function PickRoom (props){
             setChallengeState(<PlayerChallengeItem hasChallenge={false} name={name}  pname="" pSocket ="" socket={socket} />)
         
         }
-    })
+    })*/
+
 
     function serverReq(){
-        socket.emit("join-room", name)
+        socket.emit("join-room", name, 1)
         
     }
 
