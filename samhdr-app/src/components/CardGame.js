@@ -1,6 +1,8 @@
 import "../App.css"
 import React from "react"
 import Card from "./Card.js"
+import GameStatsBar from "./GameStatsBar.js"
+import GameControlsBar from "./GameControlsBar.js"
 
 function CardGame(props){
    
@@ -34,8 +36,9 @@ function CardGame(props){
 
     return (
         <div className="game">
-            <h1>Game!</h1>
-            <div className="game--opponent-stats"></div>
+            <div className="game--opponent-stats">
+                <GameStatsBar />
+            </div>
             <div className="game--opponent-hand">
                 <Card suit={0} value={1}/>
                 <Card suit={0} value={1}/>
@@ -44,7 +47,9 @@ function CardGame(props){
                 <Card suit={0} value={1}/>
             </div>
             <div className="game--opponent-active-card"></div>
+                <Card suit={-1} value={1}/>
             <div className="game--player-active-card"></div>
+                <Card suit={-1} value={1}/>
             <div className="game--player-hand">
                 <Card suit={hand[0].suit} value={hand[0].value}/>
                 <Card suit={hand[1].suit} value={hand[1].value}/>
@@ -53,7 +58,10 @@ function CardGame(props){
                 <Card suit={hand[4].suit} value={hand[4].value}/>
             </div>
             <div className="game--player-moves"></div>
-            <div className="game--player-stats"></div>
+                <GameControlsBar />
+            <div className="game--player-stats">
+                <GameStatsBar />
+            </div>
         </div>
     )
 }

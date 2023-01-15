@@ -240,28 +240,38 @@
     cursor: pointer;
 }
 .card {
-    background-color: antiquewhite;
+    
     width: 117px;
     height: 167px;
-    border-style: solid;
-    border-width: 5px;
+  
     border-radius: 10px;
     margin-bottom: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.card:hover {
+ 
+    border-color: goldenrod;
+}
+.card--inner{
+    margin-top: 5%;
+    height: 167px;
+    
 }
 
 .card--top-num-container{
     margin-left:auto;
-    margin-right: 5%;
+    margin-right: 10%;
     width: 20%;
-    margin-top: -20%;
+    margin-top: -15%;
     
 }
 .card--bottom-num-container{
  
     width: 20%;
     rotate: 180deg;
-    margin-left: 5%;
-    margin-top: -20%;
+    margin-left: 10%;
+    margin-top: -25%;
     
 }
 .card--num {
@@ -278,49 +288,230 @@
 .card--main-symbol{
    
     width: 60%;
-    margin-top: -5%;
+    margin-top: -10%;
     margin-bottom: -5%;
     margin-left:20%;
+}
+.card-suit--1{
+    height: 167px;
+    border-color: antiquewhite ;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+    
+
 }
 
 .card-suit-0 > div {
     color: #b00421;
 }
+.card-suit-0 {
+    height: 167px;
+    background-color: antiquewhite;
+    border-color: antiquewhite ;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+    background-image: url('assets/card_back_red.png');
+   
+    background-size: 310%;
+    background-position: center;
+}
 .card-suit-1 > div {
     color: #b00421;
 }
+.card-suit-1 {
+    background-color: antiquewhite;
+    border-color: #b00421 ;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+}
+.card-suit-1:hover {
+    border-color: #690213 ;
+}
 .card-suit-2 > div {
-    color: #ff6003;
+    color: #ff6003
+}
+.card-suit-2 {
+    background-color: antiquewhite;
+    border-color: #ff6003 ;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+}
+.card-suit-2:hover {
+    border-color: #933803 ;
 }
 .card-suit-3 > div {
     color: #ffb303;
+
+}
+.card-suit-3 {
+    background-color: antiquewhite;
+    border-color: #ffb303 ;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+}
+.card-suit-3:hover {
+    border-color: #906603 ;
 }
 .card-suit-4 > div {
     color: #17ad00;
 }
+.card-suit-4 {
+    background-color: antiquewhite;
+    border-color: #17ad00 ;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+}
+.card-suit-4:hover {
+    border-color: #0d5f00   ;
+}
 .card-suit-5 > div {
     color: #034ec7;
+}
+.card-suit-5 {
+    background-color: antiquewhite;
+    border-color: #034ec7 ;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+}
+.card-suit-5:hover {
+    border-color: #022a6a   ;
 }
 .card-suit-6 > div {
     color: #7836d4;
 }
+.card-suit-6 {
+    background-color: antiquewhite;
+    border-color: #7836d4 ;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+}
+.card-suit-6:hover {
+    border-color: #3e1c6e  ;
+}
 
 .card--back{
     width: 100%;
+    height: 100%;
+    background-size: cover;
 }
 .test--card-display{
     display: flexbox;
     width: 500px;
     
 }
+.game {
+    width: 100%;
+    border-style: solid;
+    border-width: 5px;
+    border-color: antiquewhite;
+    border-radius: 30px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    padding-top: 2.5%;
+
+}
 .game--opponent-hand {
     display: flex;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
+   
+    width: 60%;
+    min-width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+  
+    
 }
 .game--player-hand {
     display: flex;
-    padding-left: 2.5%;
+    
     padding-right: 2.5%;
+    width: 60%;
+    min-width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.game--stats-bar{
+    display: flex;
+    align-items: center;
+    background-color:#132138;
+    width: 80%;
+    height: 10%;
+    border-style: solid;
+    border-width: 5px;
+    border-color: antiquewhite;
+    border-radius: 30px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.game--stat-img{
+    height: 35px;
+    width: 35px;
+    margin-left: auto;
+    margin-right: 1%;
+}
+
+.game--control-bar{
+    display: flex;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.game--control{
+    background-color:#132138;
+    border-color: antiquewhite ;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    width: 25%;
+    height: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+.game--control:hover{
+    border-color: goldenrod;
+    color: goldenrod;
+}
+.game--control:active{
+    border-color: rgb(218, 97, 32);
+    color: rgb(218, 97, 32);
+}
+.game--control-disabled{
+    background-color:#132138;
+    border-color: rgb(80, 80, 80) ;
+    color: rgb(80, 80, 80);
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    width: 25%;
+    height: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 

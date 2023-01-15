@@ -27,6 +27,9 @@ function Card(props){
         return (
             <div className={"card"}>
             <div className="card-inner">
+            <div className={"card-suit-" + suit}>
+                    
+            </div>
             </div>
 
 
@@ -38,7 +41,6 @@ function Card(props){
             <div className={"card"}>
             <div className="card-inner">
                 <div className={"card-suit-" + suit}>
-                    <img src={symbols[suit]} alt="Swords" className="card--back"/>
                 </div>
             </div>
 
