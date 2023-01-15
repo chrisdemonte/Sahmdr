@@ -241,45 +241,86 @@
 }
 .card {
     background-color: antiquewhite;
-    width: 200px;
-    height: 300px;
+    width: 117px;
+    height: 167px;
     border-style: solid;
     border-width: 5px;
-    border-radius: 20px;
-    padding: 10px;
-    position: absolute;
-    
+    border-radius: 10px;
+    margin-bottom: 2%;
 }
+
 .card--top-num-container{
-    position: absolute;
-    top: 0px;
-    right : 10px;
-    width: 30px;
+    margin-left:auto;
+    margin-right: 5%;
+    width: 20%;
+    margin-top: -20%;
     
 }
 .card--bottom-num-container{
-    position: absolute;
-    width: 30px;
-    bottom: 0px;
+ 
+    width: 20%;
     rotate: 180deg;
+    margin-left: 5%;
+    margin-top: -20%;
     
+}
+.card--num {
+    width: 100%;
+    text-align: center;
+    margin-bottom: -5%;
+
+}
+.card--symbol{
+    width : 100%;
+    margin-top: -5%;
+
+}
+.card--main-symbol{
+   
+    width: 60%;
+    margin-top: -5%;
+    margin-bottom: -5%;
+    margin-left:20%;
+}
+
+.card-suit-0 > div {
+    color: #b00421;
 }
 .card-suit-1 > div {
     color: #b00421;
 }
-.card--num {
-    width: 30px;
-    text-align: center;
+.card-suit-2 > div {
+    color: #ff6003;
+}
+.card-suit-3 > div {
+    color: #ffb303;
+}
+.card-suit-4 > div {
+    color: #17ad00;
+}
+.card-suit-5 > div {
+    color: #034ec7;
+}
+.card-suit-6 > div {
+    color: #7836d4;
+}
 
+.card--back{
+    width: 100%;
 }
-.card--symbol{
-    width : 30px;
-    margin-top: -20px;
+.test--card-display{
+    display: flexbox;
+    width: 500px;
+    
 }
-.card--main-symbol-1{
-    position: absolute;
-    width: 140px;
-    top: 80px;
-    left:40px
+.game--opponent-hand {
+    display: flex;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+}
+.game--player-hand {
+    display: flex;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
 }
 

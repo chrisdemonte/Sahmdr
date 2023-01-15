@@ -11,18 +11,10 @@ function PickRoom (props){
     const setLayout = props.setLayout
     const name = props.name
     const selections = props.selections
-   // var buttonStates = []
+
     const [challengeState, setChallengeState] = React.useState(<PlayerChallengeItem hasChallenges={false} />)
-   // var players = {}
-   // var keys = []
     var playerListItems = []
     const [roomState, setRoomState] = React.useState(<div></div>)
-   // const socket = io('http://localhost:22222')
-   // socket.on('success', () => {setRoomState(<div>Successfully Connected to the server</div>)})
-
-   
-    
-       // console.log(socket.listeners("room-data"))
     
     function generateRoom(players, keys){
         //let rows = []
@@ -109,6 +101,42 @@ function PickRoom (props){
 
     }
 */
+    function generateDeck(deck){
+        let cardNames = ["", "Swords", "Arrows", "Magic", "Healing", "Defense", "Resistance"]
+        let suits = []
+        for (let i = 0; i < selections.length; i++){
+            if (selections[i]){
+                suits.push(i + 1)
+            }
+        }
+        for (let j = 0; j < suits.length; j++){
+            for (let k = 1; k < 11; k++){
+                deck.push({"value": k, "suit": suits[j], "name": `${k} of ${cardNames[suits[j]]}`})
+            }
+            deck.push({"value": 11, "suit": suits[j], "name": `Jack of ${cardNames[suits[j]]}`})
+            deck.push({"value": 12, "suit": suits[j], "name": `Queen of ${cardNames[suits[j]]}`})
+            deck.push({"value": 13, "suit": suits[j], "name": `King of ${cardNames[suits[j]]}`})
+        }
+    } 
+    function shuffleDeck(deck){
+        let range = 0
+        let swap
+        for (let a = deck.length - 1; a > 0; a-- ){
+            range = Math.floor(Math.random() * a)
+            swap = deck[range]
+            deck[range] = deck[a]
+            deck[a] = swap
+        }
+    }
+    function generateHand(hand, deck){
+        hand[0] = deck[0]
+        hand[1] = deck[1]
+        hand[2] = deck[2]
+        hand[3] = deck[3]
+        hand[4] = deck[4]
+
+    }
+    
 
     
     /**
@@ -139,7 +167,27 @@ function PickRoom (props){
 
     socket.off("challenge-accepted")
     socket.on("challenge-accepted", (opponentName, opponentID, moveFirst) =>{
-        setLayout(<CardGame socket={socket.id} name={name} pName={opponentName} pSocket={opponentID} moveFirst={moveFirst} setLayout={setLayout}/>)
+      //  setLayout(<CardGame socket={socket.id} name={name} pName={opponentName} pSocket={opponentID} moveFirst={moveFirst} setLayout={setLayout}/>)
+        
+        var deck = []
+        var hand = [0,0,0,0,0]
+     
+        generateDeck(deck)
+       // console.log("** After Deck Make ** ")
+      //  console.log(deck)
+        shuffleDeck(deck)
+        shuffleDeck(deck)
+       // console.log("** After Shuffle ** ")
+      //  console.log(deck)
+        generateHand(hand, deck)
+      //  console.log("** After Draw Hand ** ")
+      //  console.log(hand)
+        socket.off("room-data")
+        socket.off("recieve-challenge")
+        socket.off("challenge-denied")
+        socket.off("challenge-accepted")
+    
+        setLayout(<CardGame setLayout={setLayout} socket={socket} name={name} pName={opponentName} pSocket={opponentID} moveFirst={moveFirst} deck={deck} hand={hand}/>)
     })
 
     socket.off("challenge-denied")

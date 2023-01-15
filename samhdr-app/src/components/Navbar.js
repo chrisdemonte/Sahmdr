@@ -1,4 +1,5 @@
 import "../App.css"
+import CardGame from "./CardGame"
 import HowToPlayContent from "./HowToPlayContent.js"
 import PickSuitsContent from "./PickSuitsContent.js"
 import StartGameContent from "./StartGameContent.js"
@@ -14,6 +15,16 @@ function Navbar(props) {
         setLayout(<PickSuitsContent setLayout={setLayout} socket={socket}/>)
     }
     function setQuitGame (){
+        /*
+        const setLayout = props.setLayout
+        const socket = props.socket
+        const name = props.name
+        const pSocket = props.pSocket
+        const pName = props.pName
+        const moveFirst = props.moveFirst
+        const selections = props.selections*/
+        //var selections = [true, true, true, false, false, false]
+        //setLayout(<CardGame setLayout={setLayout} socket={socket} name="Chris" pName="Connor" moveFirst="1" selections={selections}/>)
         setLayout(<StartGameContent/>)
     }
 
