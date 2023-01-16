@@ -19,6 +19,9 @@ function GameControlsBar(props){
                 index = i
             }
         }
+        if (index < 0){
+            return
+        }
         hand[index] = activeCard
         
         //setSelection([0,0,0,0,0])
