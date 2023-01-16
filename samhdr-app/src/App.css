@@ -271,7 +271,7 @@
     width: 20%;
     rotate: 180deg;
     margin-left: 10%;
-    margin-top: -25%;
+    margin-top: -20%;
     
 }
 .card--num {
@@ -299,6 +299,7 @@
     border-width: 5px;
     border-radius: 10px;
     
+    
 
 }
 
@@ -317,84 +318,158 @@
     background-size: 310%;
     background-position: center;
 }
-.card-suit-1 > div {
+.card-suit-0-selected {
+    height: 167px;
+    background-color: antiquewhite;
+    border-color: #b00421;;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+    background-image: url('assets/card_back_red.png');
+   
+    background-size: 310%;
+    background-position: center;
+ 
+}
+.card-suit-1 > div, .card-suit-1-selected > div {
     color: #b00421;
 }
 .card-suit-1 {
+    height: 167px;
     background-color: antiquewhite;
     border-color: #b00421 ;
     border-style: solid;
     border-width: 5px;
     border-radius: 10px;
 }
+.card-suit-1-selected {
+    height: 167px;
+    background-color: #ffa0b0;
+    border-color: #b00421 ;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+ 
+}
 .card-suit-1:hover {
     border-color: #690213 ;
 }
-.card-suit-2 > div {
+.card-suit-2 > div, .card-suit-2-selected > div  {
     color: #ff6003
 }
 .card-suit-2 {
+    height: 167px;
     background-color: antiquewhite;
     border-color: #ff6003 ;
     border-style: solid;
     border-width: 5px;
     border-radius: 10px;
 }
+.card-suit-2-selected {
+    height: 167px;
+    background-color:  #ffbf9a;
+    border-color: #ff6003 ;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+ 
+}
 .card-suit-2:hover {
     border-color: #933803 ;
 }
-.card-suit-3 > div {
+.card-suit-3 > div, .card-suit-3-selected > div  {
     color: #ffb303;
 
 }
 .card-suit-3 {
+    height: 167px;
     background-color: antiquewhite;
     border-color: #ffb303 ;
     border-style: solid;
     border-width: 5px;
     border-radius: 10px;
 }
+.card-suit-3-selected {
+    height: 167px;
+    background-color:  #ffe88a;
+    border-color: #ffb303 ;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+ 
+}
 .card-suit-3:hover {
     border-color: #906603 ;
 }
-.card-suit-4 > div {
+.card-suit-4 > div, .card-suit-4-selected > div  {
     color: #17ad00;
 }
 .card-suit-4 {
+    height: 167px;
     background-color: antiquewhite;
     border-color: #17ad00 ;
     border-style: solid;
     border-width: 5px;
     border-radius: 10px;
 }
+.card-suit-4-selected {
+    height: 167px;
+    background-color:  #a7ff9a;
+    border-color: #17ad00 ;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+ 
+}
 .card-suit-4:hover {
     border-color: #0d5f00   ;
 }
-.card-suit-5 > div {
+.card-suit-5 > div, .card-suit-5-selected > div  {
     color: #034ec7;
 }
 .card-suit-5 {
+    height: 167px;
     background-color: antiquewhite;
     border-color: #034ec7 ;
     border-style: solid;
     border-width: 5px;
     border-radius: 10px;
 }
+.card-suit-5-selected {
+    height: 167px;
+    background-color:  #9ac1ff;
+    border-color: #034ec7 ;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+ 
+}
 .card-suit-5:hover {
     border-color: #022a6a   ;
 }
-.card-suit-6 > div {
+.card-suit-6 > div, .card-suit-6-selected > div  {
     color: #7836d4;
 }
 .card-suit-6 {
+    height: 167px;
     background-color: antiquewhite;
     border-color: #7836d4 ;
     border-style: solid;
     border-width: 5px;
     border-radius: 10px;
 }
+.card-suit-6-selected {
+    height: 167px;
+    background-color:  #cdaafe ;
+    border-color: #7836d4 ;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+ 
+}
 .card-suit-6:hover {
     border-color: #3e1c6e  ;
+
 }
 
 .card--back{

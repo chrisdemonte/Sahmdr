@@ -9,8 +9,15 @@ import cardBack from '../assets/card_back_red.png'
 
 function Card(props){
 
+    const [selected, setSelected] = props.selectionState
+    const slot = props.slot
     const value = props.value
+    const socket = props.socket
+    const opponentSocket = props.opponentSocket
+    const suit = props.suit
+    var symbols = [cardBack, sword_sym, arrow_sym, magic_sym , healing_sym ,defense_sym , resist_sym ]
     var valDisplay = props.value
+    var selectionStr = ""
     if (value == 11){
         valDisplay = "J"
     }
@@ -20,8 +27,17 @@ function Card(props){
     if (value == 13){
         valDisplay = "K"
     }
-    const suit = props.suit
-    var symbols = [cardBack, sword_sym, arrow_sym, magic_sym , healing_sym ,defense_sym , resist_sym ]
+    
+
+    function selectCard (){
+        socket.emit("select-card", slot, opponentSocket)
+        let selections=[0,0,0,0,0]
+        selections[slot] = 1
+        setSelected(selections)
+    }
+    if (slot < 5 && selected[slot] === 1){
+        selectionStr = "-selected"
+    }
 
     if (suit === -1 ){
         return (
@@ -40,7 +56,7 @@ function Card(props){
         return (
             <div className={"card"}>
             <div className="card-inner">
-                <div className={"card-suit-" + suit}>
+                <div className={"card-suit-" + suit + selectionStr}>
                 </div>
             </div>
 
@@ -51,7 +67,7 @@ function Card(props){
     return (
         <div className={"card"}>
             <div className="card-inner">
-                <div className={"card-suit-" + suit}>
+                <div className={"card-suit-" + suit + selectionStr} onClick={selectCard}>
                 <div className = "card--top-num-container">
                     <h2 className = "card--num">{valDisplay}</h2>
                     <img src={symbols[suit]} alt="Swords" className="card--symbol"/>
