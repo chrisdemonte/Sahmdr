@@ -9,23 +9,56 @@ function GameControlsBar(props){
     const socket= props.socket 
     const opponentSocket = props.opponentSocket
     const [disabled, setDisabled] = props.disabled
+    const [playerMove, setPlayerMove] = props.playerMove
 
-    function onPlayCard(){
-        let selectedCard = -1
+    function getCardIndex(){
         let index = -1
         for (let i = 0; i < selection.length; i++){
             if (selection[i] == 1){
-                selectedCard = hand[i]
+                //selectedCard = hand[i]
                 index = i
             }
         }
-        if (index < 0){
+        return index
+    }
+    function onPlayCard(){
+        let cardIndex = getCardIndex()
+        if (cardIndex < 0){
             return
         }
-        hand[index] = activeCard
+        let selectedCard = hand[cardIndex]
+        hand[cardIndex] = activeCard
         
-        //setSelection([0,0,0,0,0])
-        socket.emit("used-play-card", opponentSocket, index, selectedCard)
+        setPlayerMove(0)
+        socket.emit("used-play-card", opponentSocket, cardIndex, selectedCard)
+        setDisabled(["-disabled","-disabled","-disabled","-disabled"])
+        setActiveCard(selectedCard)
+    }
+
+    function onPlayFaceDown(){
+        let cardIndex = getCardIndex()
+        if (cardIndex < 0){
+            return
+        }
+        let selectedCard = {"suit": 0, "value": 0, "card": hand[cardIndex]}
+        hand[cardIndex] = activeCard
+
+        setPlayerMove(1)
+        socket.emit("used-play-face-down", opponentSocket, cardIndex, selectedCard)
+        setDisabled(["-disabled","-disabled","-disabled","-disabled"])
+        setActiveCard(selectedCard)
+    }
+
+    function onStack(){
+        let cardIndex = getCardIndex()
+        if (cardIndex < 0){
+            return
+        }
+        let selectedCard = hand[cardIndex]
+        hand[cardIndex] = activeCard
+
+        setPlayerMove(2)
+        socket.emit("used-stack-0", opponentSocket, cardIndex, selectedCard)
         setDisabled(["-disabled","-disabled","-disabled","-disabled"])
         setActiveCard(selectedCard)
     }
@@ -33,8 +66,8 @@ function GameControlsBar(props){
     return (
         <div className="game--control-bar">
             <h2 className={"game--control" + disabled[0]} onClick={onPlayCard}> PLAY CARD</h2>
-            <h2 className={"game--control" + disabled[1]}> PLAY FACE DOWN</h2>
-            <h2 className={"game--control" + disabled[2]}> STACK</h2>
+            <h2 className={"game--control" + disabled[1]} onClick={onPlayFaceDown}> PLAY FACE DOWN</h2>
+            <h2 className={"game--control" + disabled[2]} onClick={onStack}> STACK</h2>
             <h2 className={"game--control" + disabled[3]}> WILD CARD</h2>
         </div>
     )

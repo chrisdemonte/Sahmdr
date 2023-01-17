@@ -6,18 +6,26 @@ import healing_sym from '../assets/healing_symbol.png'
 import defense_sym from '../assets/defense_symbol.png'
 import resist_sym from '../assets/resistance_symbol.png'
 import cardBack from '../assets/card_back_red.png'
+import React from 'react'
 
 function Card(props){
 
     const [selected, setSelected] = props.selectionState
     const slot = props.slot
     const value = props.value
+    
     const socket = props.socket
     const opponentSocket = props.opponentSocket
     const suit = props.suit
+    const playerMove = props.playerMove
+    const activeCard = props.activeCard
+    const hand = props.hand
+
     var symbols = [cardBack, sword_sym, arrow_sym, magic_sym , healing_sym ,defense_sym , resist_sym ]
-    var valDisplay = props.value
+    
+    
     var selectionStr = ""
+    var valDisplay = value
     if (value == 11){
         valDisplay = "J"
     }
@@ -27,13 +35,28 @@ function Card(props){
     if (value == 13){
         valDisplay = "K"
     }
+    const valueState = React.useState(valDisplay)
     
 
-    function selectCard (){
-        socket.emit("select-card", slot, opponentSocket)
-        let selections=[0,0,0,0,0]
-        selections[slot] = 1
-        setSelected(selections)
+    function selectCard (){ 
+        if (playerMove[0] === 2){
+            if (hand[slot].suit === activeCard.suit){
+                hand[slot].value += activeCard[0].value
+            }
+            playerMove[1](22)
+            socket.emit("used-stack-1", opponentSocket)
+            
+            //console.log(hand[slot].value)
+            //console.log(activeCard[0].value)
+            valueState[1](hand[slot].value + activeCard[0].value)
+            activeCard[1]({"suit": -1, "value": 0})
+        }
+        else {
+            socket.emit("select-card", slot, opponentSocket)
+            let selections=[0,0,0,0,0]
+            selections[slot] = 1
+            setSelected(selections)
+        }
     }
     if (slot < 5 && selected[slot] === 1){
         selectionStr = "-selected"
@@ -69,7 +92,7 @@ function Card(props){
             <div className="card-inner">
                 <div className={"card-suit-" + suit + selectionStr} onClick={selectCard}>
                 <div className = "card--top-num-container">
-                    <h2 className = "card--num">{valDisplay}</h2>
+                    <h2 className = "card--num">{valueState[0]}</h2>
                     <img src={symbols[suit]} alt="Swords" className="card--symbol"/>
                 </div>
 
@@ -79,7 +102,7 @@ function Card(props){
                 </div>
 
                 <div className = "card--bottom-num-container">
-                    <h2 className = "card--num">{valDisplay}</h2>
+                    <h2 className = "card--num">{valueState[0]}</h2>
                     <img src={symbols[suit]} alt="Swords" className="card--symbol"/>
                 </div>
                 </div>
