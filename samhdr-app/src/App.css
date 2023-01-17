@@ -40,12 +40,16 @@
 .main--content {
     padding-left: 5%;
     padding-right: 5%;
+    width: 100%;
+    height: 100%;
     font-family: 'Signika', sans-serif;
-
 }
 .pick-suits--content{
     width: 30%;
+    height: 100%;
     margin: auto auto;
+    font-size: 12px;
+    font-size: 1.5vh;
 }
 .pick-suits--content > h1{
     text-align: center;
@@ -57,6 +61,7 @@
 .suit-button{
     border-style: solid;
     border-width: 5px;
+    border-width: .5vh;
     border-color: antiquewhite;
     border-radius: 30px;
     cursor: pointer;
@@ -77,6 +82,7 @@
     color: green;
     border-style: solid;
     border-width: 5px;
+    border-width: .5vh;
     border-color: green;
     background-color: #132138;
     border-radius: 30px;
@@ -86,6 +92,7 @@
 .name-entry{
     border-style: solid;
     border-width: 5px;
+    border-width: .5vh;
     border-color: antiquewhite;
     background-color: #132138;
     width: 96%;
@@ -95,6 +102,7 @@
     color: antiquewhite;
     font-family: 'Signika Negative', sans-serif;
     font-size: 30px;
+    font-size: 3vh;
     font-weight: 500;
 
 }
@@ -106,6 +114,7 @@
 .start-game-btn{
     border-style: solid;
     border-width: 5px;
+    border-width: .5vh;
     border-color: antiquewhite;
     border-radius: 30px;
     cursor: pointer;
@@ -134,6 +143,7 @@
 .pickRoom--players{
     border-style: solid;
     border-width: 5px;
+    border-width: .5vh;
     border-color: antiquewhite;
     border-radius: 30px;
     width: 100%;
@@ -147,6 +157,7 @@
 .pickRoom--challenges{
     border-style: solid;
     border-width: 5px;
+    border-width: .5vh;
     border-color: antiquewhite;
     border-radius: 30px;
     width: 100%;
@@ -156,6 +167,7 @@
 .pickRoom--players--title{
     width: 100%;
     text-align: center;
+    font-size: 2.5vh;
 }
 .playerListItem {
     display:flex;
@@ -163,6 +175,9 @@
     width: 80%;
     border-style: solid;
     border-width: 5px;
+    border-width: .5vh;
+    font-size: 30px;
+    font-size: 2vh;
     border-color: antiquewhite;
     border-radius: 30px;
 }
@@ -174,6 +189,9 @@
     display: flex;
     margin-left: auto;
     margin-right: 10%;
+    font-size: 30px;
+    border-width: .5vh;
+    font-size: 2.5vh;
 }
 .playerListItem--challenge:hover{
     
@@ -194,11 +212,13 @@
     border-width: 5px;
     border-color: antiquewhite;
     border-radius: 30px;
+    border-width: .5vh;
     width: 40%;
     margin-top: 2.5%;
     margin-left: 30%;
     font-family: 'Signika Negative', sans-serif;
     font-size: 25px;
+    font-size: 2.5vh;
     padding-top: 1%;
     padding-bottom: 1%;
 
@@ -241,9 +261,8 @@
 }
 .card {
     
-    width: 117px;
-    height: 167px;
-  
+    width:10.5vh;
+    height:15vh;
     border-radius: 10px;
     margin-bottom: 2%;
     margin-left: auto;
@@ -255,7 +274,11 @@
 }
 .card--inner{
     margin-top: 5%;
-    height: 167px;
+
+    width:100%;
+    height: 100%;
+    min-width:100%;
+    min-height: 100%;
     
 }
 
@@ -264,6 +287,7 @@
     margin-right: 10%;
     width: 20%;
     margin-top: -15%;
+    font-size: 1.5vh;
     
 }
 .card--bottom-num-container{
@@ -272,6 +296,7 @@
     rotate: 180deg;
     margin-left: 10%;
     margin-top: -20%;
+    font-size: 1.5vh;
     
 }
 .card--num {
@@ -293,21 +318,20 @@
     margin-left:20%;
 }
 .card-suit--1{
-    height: 167px;
+    width:10.5vh;
+    height:15vh;
     border-color: antiquewhite ;
     border-style: solid;
     border-width: 5px;
     border-radius: 10px;
-    
-    
-
 }
 
 .card-suit-0 > div {
     color: #b00421;
 }
 .card-suit-0 {
-    height: 167px;
+    width:10.5vh;
+    height:15vh;
     background-color: antiquewhite;
     border-color: antiquewhite ;
     border-style: solid;
@@ -319,7 +343,9 @@
     background-position: center;
 }
 .card-suit-0-selected {
-    height: 167px;
+
+    width:10.5vh;
+    height:15vh;
     background-color: antiquewhite;
     border-color: #b00421;;
     border-style: solid;
@@ -335,7 +361,8 @@
     color: #b00421;
 }
 .card-suit-1 {
-    height: 167px;
+    width:10.5vh;
+    height:15vh;
     background-color: antiquewhite;
     border-color: #b00421 ;
     border-style: solid;
@@ -343,7 +370,8 @@
     border-radius: 10px;
 }
 .card-suit-1-selected {
-    height: 167px;
+    width:10.5vh;
+    height:15vh;
     background-color: #ffa0b0;
     border-color: #b00421 ;
     border-style: solid;
@@ -358,7 +386,8 @@
     color: #ff6003
 }
 .card-suit-2 {
-    height: 167px;
+    width:10.5vh;
+    height:15vh;
     background-color: antiquewhite;
     border-color: #ff6003 ;
     border-style: solid;
@@ -366,7 +395,8 @@
     border-radius: 10px;
 }
 .card-suit-2-selected {
-    height: 167px;
+    width:10.5vh;
+    height:15vh;
     background-color:  #ffbf9a;
     border-color: #ff6003 ;
     border-style: solid;
@@ -382,7 +412,8 @@
 
 }
 .card-suit-3 {
-    height: 167px;
+    width:10.5vh;
+    height:15vh;
     background-color: antiquewhite;
     border-color: #ffb303 ;
     border-style: solid;
@@ -390,7 +421,8 @@
     border-radius: 10px;
 }
 .card-suit-3-selected {
-    height: 167px;
+    width:10.5vh;
+    height:15vh;
     background-color:  #ffe88a;
     border-color: #ffb303 ;
     border-style: solid;
@@ -405,7 +437,8 @@
     color: #17ad00;
 }
 .card-suit-4 {
-    height: 167px;
+    width:10.5vh;
+    height:15vh;
     background-color: antiquewhite;
     border-color: #17ad00 ;
     border-style: solid;
@@ -413,7 +446,8 @@
     border-radius: 10px;
 }
 .card-suit-4-selected {
-    height: 167px;
+    width:10.5vh;
+    height:15vh;
     background-color:  #a7ff9a;
     border-color: #17ad00 ;
     border-style: solid;
@@ -428,7 +462,8 @@
     color: #034ec7;
 }
 .card-suit-5 {
-    height: 167px;
+    width:10.5vh;
+    height:15vh;
     background-color: antiquewhite;
     border-color: #034ec7 ;
     border-style: solid;
@@ -436,7 +471,8 @@
     border-radius: 10px;
 }
 .card-suit-5-selected {
-    height: 167px;
+    width:10.5vh;
+    height:15vh;
     background-color:  #9ac1ff;
     border-color: #034ec7 ;
     border-style: solid;
@@ -451,7 +487,8 @@
     color: #7836d4;
 }
 .card-suit-6 {
-    height: 167px;
+    width:10.5vh;
+    height:15vh;
     background-color: antiquewhite;
     border-color: #7836d4 ;
     border-style: solid;
@@ -459,7 +496,8 @@
     border-radius: 10px;
 }
 .card-suit-6-selected {
-    height: 167px;
+    width:10.5vh;
+    height:15vh;
     background-color:  #cdaafe ;
     border-color: #7836d4 ;
     border-style: solid;
@@ -473,8 +511,8 @@
 }
 
 .card--back{
-    width: 100%;
-    height: 100%;
+    width:10.5vh;
+    height:15vh;
     background-size: cover;
 }
 .test--card-display{
@@ -484,6 +522,7 @@
 }
 .game {
     width: 100%;
+    height: 100%;
     border-style: solid;
     border-width: 5px;
     border-color: antiquewhite;
@@ -491,7 +530,8 @@
     margin-left: 5%;
     margin-right: 5%;
     margin-bottom: 5%;
-    padding-top: 2.5%;
+    padding-top: .5%;
+    padding-bottom: .5%;
 
 }
 .game--opponent-hand {
@@ -501,7 +541,8 @@
     min-width: 60%;
     margin-left: 20%;
     margin-right: 20%;
-  
+    margin-bottom: 1%;
+    margin-top: 1%;
     
 }
 .game--player-hand {
@@ -519,20 +560,23 @@
     align-items: center;
     background-color:#132138;
     width: 80%;
-    height: 10%;
+    height: 4vh;
     border-style: solid;
     border-width: 5px;
+    border-width: .5vh;
     border-color: antiquewhite;
     border-radius: 30px;
     margin-left: 5%;
     margin-right: 5%;
-    margin-bottom: 5%;
     padding-left: 5%;
     padding-right: 5%;
+    font-size: 1.5vh;
 }
 .game--stat-img{
     height: 35px;
     width: 35px;
+    width: 3vh;
+    height: 3vh;
     margin-left: auto;
     margin-right: 1%;
 }
@@ -547,12 +591,14 @@
     border-color: antiquewhite ;
     border-style: solid;
     border-width: 5px;
+    border-width: .5vh;
     border-radius: 20px;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    padding-top: .5%;
+    padding-bottom: .5%;
     width: 25%;
-    height: 100%;
+   
     text-align: center;
+    font-size: 2vh;
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
@@ -576,10 +622,11 @@
     border-style: solid;
     border-width: 5px;
     border-radius: 20px;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    border-width: .5vh;
+    padding-top: .5%;
+    padding-bottom: .5%;
+    font-size: 2vh;
     width: 25%;
-    height: 100%;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
