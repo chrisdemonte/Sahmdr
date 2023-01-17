@@ -4,7 +4,7 @@ Welcome to SAMHDR, a card game that is currently in developement and will eventu
 
 (See "Playing SAMHDR" below)
 
-## Launching SAMHDR
+## Launching SAMHDR in Development App
 
 SAMHDR was developed in JavaScript with a React front-end and a Node.JS back-end. To run this app locally you will need to have React, Node.JS, and Socket.IO installed on your system. You will also need the SAMHDR Server application found here: [SAMHDR Sever Repository](https://github.com/chrisdemonte/Samhdr-Server).
 
@@ -16,7 +16,7 @@ In this early stage of development you can play against yourself by openning two
 
 ## Playing SAMHDR
 
-(AS OF 1/15/2023: THE CARD GAME ITSELF HAS NOT BEEN IMPLEMENTED YET. SORRY! AT THIS POINT SAMHDR HAS BEEN IN DEVELOPMENT FOR ABOUT ONE WEEK, AND DEVELOPEMENT OF THE ACTUAL GAME HAS JUST STARTED. THE SERVER-CLIENT CODE AND PLAYER ROOM WAS IMPLEMENTED FIRST, SO YOU CAN MAKE YOUR DECK AND CHALLENGE A PLAYER, BUT ONCE YOU ENTER THE MATCH NOT MUCH WILL HAPPEN.)
+(AS OF 1/16/2023: THE CARD GAME IS IN THE EARLY STAGES OF DEVELOPMENT. PLAYERS CAN USE THE "PLAY CARD" MOVE DURING OFFENSIVE PHASES AND DEFENSIVE PHASES. "PLAY FACE DOWN", "STACK", AND "WILD CARD" ARE NOT IMPLEMENTED YET. THERE IS NO WIN CONDITION YET.)
 
 In the SAMHDR app, click the "Start Game" button in the navbar. 
 

@@ -87,17 +87,17 @@ function CardGame(props){
         }
     })
     socket.off("end-phase-play-card")
-    socket.on("end-phase-play-card", (offensivePlayer, damage_heal)=>{
+    socket.on("end-phase-play-card", (oneWhoTriggered, damage_heal)=>{
         //console.log("end-phase-play-card: " + target + damage_heal)
         let statAry = [... stats[0]]
         let opponentStatAry = [... opponentStats[0]]
-        if (offensivePlayer === 0){
-            statAry[0] -= damage_heal[0]
+        if (oneWhoTriggered === 1){
             statAry[0] += damage_heal[1]
+            opponentStatAry[0] -=  damage_heal[0]
         }
         else {
-            opponentStatAry[0] -= damage_heal[0]
             opponentStatAry[0] += damage_heal[1]
+            statAry[0] -= damage_heal[0]
         }
         stats[1](statAry)
         opponentStats[1](opponentStatAry)
