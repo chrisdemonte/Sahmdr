@@ -10,63 +10,63 @@ import React from 'react'
 
 function Card(props){
 
+    const card = props.card
+    const activeCard = props.activeCard
     const [selected, setSelected] = props.selectionState
     const slot = props.slot
-    const value = props.value
-    
     const socket = props.socket
     const opponentSocket = props.opponentSocket
-    const suit = props.suit
     const playerMove = props.playerMove
-    const activeCard = props.activeCard
     const hand = props.hand
-
+    
     var symbols = [cardBack, sword_sym, arrow_sym, magic_sym , healing_sym ,defense_sym , resist_sym ]
     
-    
-    var selectionStr = ""
-    var valDisplay = value
-    if (value == 11){
+    var valDisplay = card.value
+    if (valDisplay === 11){
         valDisplay = "J"
     }
-    if (value == 12){
-        valDisplay = "Q"
+    else if (valDisplay === 12){
+         valDisplay = "Q"
     }
-    if (value == 13){
+    else if (valDisplay === 13){
         valDisplay = "K"
     }
-    const valueState = React.useState(valDisplay)
+   
+    var selectionStr = ""
+    if (selected === slot){
+        selectionStr = "-selected"
+    }
+    
     
 
     function selectCard (){ 
         if (playerMove[0] === 2){
-            if (hand[slot].suit === activeCard.suit){
-                hand[slot].value += activeCard[0].value
+            if (card.suit === activeCard[0].suit){
+                let newValue = card.value + activeCard[0].value
+                let tempHand = [...hand[0]]
+                tempHand[slot].value = newValue
+
+                playerMove[1](22)
+                hand[1](tempHand)
+                activeCard[1]({"suit": -1, "value": 0})
+
+                socket.emit("used-stack-1", opponentSocket)
             }
-            playerMove[1](22)
-            socket.emit("used-stack-1", opponentSocket)
-            
-            //console.log(hand[slot].value)
-            //console.log(activeCard[0].value)
-            valueState[1](hand[slot].value + activeCard[0].value)
-            activeCard[1]({"suit": -1, "value": 0})
         }
         else {
+            
+            setSelected(slot)
             socket.emit("select-card", slot, opponentSocket)
-            let selections=[0,0,0,0,0]
-            selections[slot] = 1
-            setSelected(selections)
         }
     }
-    if (slot < 5 && selected[slot] === 1){
-        selectionStr = "-selected"
-    }
 
-    if (suit === -1 ){
+
+
+    if (card.suit === -1){
         return (
             <div className={"card"}>
             <div className="card-inner">
-            <div className={"card-suit-" + suit}>
+            <div className={"card-suit-" + card.suit}>
                     
             </div>
             </div>
@@ -75,11 +75,11 @@ function Card(props){
         </div>
         )
     }
-    if (suit === 0 ){
+    if (card.suit === 0 ){
         return (
             <div className={"card"}>
             <div className="card-inner">
-                <div className={"card-suit-" + suit + selectionStr}>
+                <div className={"card-suit-" + card.suit + selectionStr}>
                 </div>
             </div>
 
@@ -90,20 +90,20 @@ function Card(props){
     return (
         <div className={"card"}>
             <div className="card-inner">
-                <div className={"card-suit-" + suit + selectionStr} onClick={selectCard}>
+                <div className={"card-suit-" + card.suit + selectionStr} onClick={selectCard}>
                 <div className = "card--top-num-container">
-                    <h2 className = "card--num">{valueState[0]}</h2>
-                    <img src={symbols[suit]} alt="Swords" className="card--symbol"/>
+                    <h2 className = "card--num">{valDisplay}</h2>
+                    <img src={symbols[card.suit]} alt="Swords" className="card--symbol"/>
                 </div>
 
                 <div className="card--main-symbols">
 
-                <img src={symbols[suit]} alt="Swords" className={"card--main-symbol"} />
+                <img src={symbols[card.suit]} alt="Swords" className={"card--main-symbol"} />
                 </div>
 
                 <div className = "card--bottom-num-container">
-                    <h2 className = "card--num">{valueState[0]}</h2>
-                    <img src={symbols[suit]} alt="Swords" className="card--symbol"/>
+                    <h2 className = "card--num">{valDisplay}</h2>
+                    <img src={symbols[card.suit]} alt="Swords" className="card--symbol"/>
                 </div>
                 </div>
             </div>

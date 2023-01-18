@@ -4,63 +4,63 @@ function GameControlsBar(props){
     
     const [selection, setSelection]= props.selectionState
     const hand = props.hand 
-    const activeCard = props.activeCard
-    const setActiveCard = props.activeCardSetter
+    const [activeCard, setActiveCard] = props.playerCard
     const socket= props.socket 
     const opponentSocket = props.opponentSocket
     const [disabled, setDisabled] = props.disabled
     const [playerMove, setPlayerMove] = props.playerMove
 
-    function getCardIndex(){
-        let index = -1
-        for (let i = 0; i < selection.length; i++){
-            if (selection[i] == 1){
-                //selectedCard = hand[i]
-                index = i
-            }
-        }
-        return index
-    }
+ 
     function onPlayCard(){
-        let cardIndex = getCardIndex()
-        if (cardIndex < 0){
+        
+        if (selection < 0){
             return
         }
-        let selectedCard = hand[cardIndex]
-        hand[cardIndex] = activeCard
+        let selectedCard = hand[0][selection]
+        let tempHand = [...hand[0]]
+        tempHand[selection] = {"suit": -1, "value": 0}
         
+        hand[1](tempHand)
         setPlayerMove(0)
-        socket.emit("used-play-card", opponentSocket, cardIndex, selectedCard)
         setDisabled(["-disabled","-disabled","-disabled","-disabled"])
         setActiveCard(selectedCard)
+        console.log(selectedCard)
+
+        socket.emit("used-play-card", opponentSocket, selection, selectedCard)
     }
 
     function onPlayFaceDown(){
-        let cardIndex = getCardIndex()
-        if (cardIndex < 0){
+       
+        if (selection < 0){
             return
         }
-        let selectedCard = {"suit": 0, "value": 0, "card": hand[cardIndex]}
-        hand[cardIndex] = activeCard
-
+        let selectedCard = {"suit": 0, "value": 0, "card": hand[0][selection]}
+        let tempHand = [...hand[0]]
+        tempHand[selection] = {"suit": -1, "value": 0}
+        
+        hand[1](tempHand)
         setPlayerMove(1)
-        socket.emit("used-play-face-down", opponentSocket, cardIndex, selectedCard)
         setDisabled(["-disabled","-disabled","-disabled","-disabled"])
         setActiveCard(selectedCard)
+
+        socket.emit("used-play-face-down", opponentSocket, selection, selectedCard)
     }
 
     function onStack(){
-        let cardIndex = getCardIndex()
-        if (cardIndex < 0){
+        
+        if (selection < 0){
             return
         }
-        let selectedCard = hand[cardIndex]
-        hand[cardIndex] = activeCard
-
+        let selectedCard = hand[0][selection]
+        let tempHand = [...hand[0]]
+        tempHand[selection] = {"suit": -1, "value": 0}
+        
+        hand[1](tempHand)
         setPlayerMove(2)
-        socket.emit("used-stack-0", opponentSocket, cardIndex, selectedCard)
         setDisabled(["-disabled","-disabled","-disabled","-disabled"])
         setActiveCard(selectedCard)
+
+        socket.emit("used-stack-0", opponentSocket, selection, selectedCard)
     }
 
     return (

@@ -128,16 +128,6 @@ function PickRoom (props){
             deck[a] = swap
         }
     }
-    function generateHand(hand, deck){
-        hand[0] = deck[0]
-        hand[1] = deck[1]
-        hand[2] = deck[2]
-        hand[3] = deck[3]
-        hand[4] = deck[4]
-
-    }
-    
-
     
     /**
      * The only solution I could come up with to make a single server request that updates the page
@@ -170,8 +160,7 @@ function PickRoom (props){
       //  setLayout(<CardGame socket={socket.id} name={name} pName={opponentName} pSocket={opponentID} moveFirst={moveFirst} setLayout={setLayout}/>)
         
         var deck = []
-        var hand = [0,0,0,0,0]
-     
+        
         generateDeck(deck)
        // console.log("** After Deck Make ** ")
       //  console.log(deck)
@@ -179,7 +168,7 @@ function PickRoom (props){
         shuffleDeck(deck)
        // console.log("** After Shuffle ** ")
       //  console.log(deck)
-        generateHand(hand, deck)
+        var hand = [deck[0],deck[1],deck[2],deck[3],deck[4]]
       //  console.log("** After Draw Hand ** ")
       //  console.log(hand)
         socket.off("room-data")
