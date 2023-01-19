@@ -8,7 +8,8 @@ import io from 'socket.io-client'
 var socket 
 
 try {
-  socket = io('http://localhost:22222')
+  //socket = io('http://localhost:22222')
+  socket = io('44.211.220.199:2020')
 }
 catch (error){
   
