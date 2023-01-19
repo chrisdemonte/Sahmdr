@@ -3,34 +3,32 @@ import CardGame from "./CardGame"
 import HowToPlayContent from "./HowToPlayContent.js"
 import PickSuitsContent from "./PickSuitsContent.js"
 import StartGameContent from "./StartGameContent.js"
+import React from "react"
 function Navbar(props) {
 
     const socket = props.socket
     const setLayout = props.setLayout
+    const name = React.useState("")
 
     function setHowToPlay (){
+        socket.emit("player-left-match")
         setLayout(<HowToPlayContent/>)
+        
     }
     function setStartGame (){
-        setLayout(<PickSuitsContent setLayout={setLayout} socket={socket}/>)
+        socket.emit("player-left-match")
+        setLayout(<PickSuitsContent setLayout={setLayout} socket={socket} name={name}/>)
+        
     }
     function setQuitGame (){
-        /*
-        const setLayout = props.setLayout
-        const socket = props.socket
-        const name = props.name
-        const pSocket = props.pSocket
-        const pName = props.pName
-        const moveFirst = props.moveFirst
-        const selections = props.selections*/
-        //var selections = [true, true, true, false, false, false]
-        //setLayout(<CardGame setLayout={setLayout} socket={socket} name="Chris" pName="Connor" moveFirst="1" selections={selections}/>)
-        setLayout(<StartGameContent/>)
+        socket.emit("player-left-match")
+        setLayout(<StartGameContent socket={socket}/>)
+        
     }
 
     return (
         <nav className="navbar--main">
-            <img className="navbar--logo"></img>
+            
             <h1 className="navbar--title">SAMHDR</h1>
             <ul className="navbar--options">
                 <li className="navbar--start" onClick={setStartGame}>Start Game</li>

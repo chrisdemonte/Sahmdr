@@ -22,7 +22,8 @@ function CardGame(props){
     const opponentCardSelection = React.useState(-1) //which card from the opponent's hand was clicked last. 0 = not clicked, 1 = clicked
     const playerCard = React.useState({"suit": -1, "value" : 0}) //the player's active card from playing a move
     const opponentCard = React.useState({"suit": -1, "value" : 0}) //the opponent's active card from playing a move
-
+    const playerWildCard = React.useState({"suit": -1, "value": 0})
+    const opponentWildCard = React.useState({"suit": -1, "value": 0})
 
     const deck = props.deck         //an array of length 39 with card objects
     const hand = React.useState(props.hand)     //an array of length 5 with card object
@@ -33,9 +34,11 @@ function CardGame(props){
     const stats = React.useState([50,0,0,0,0,0,0])
     const opponentStats = React.useState([50,0,0,0,0,0,0])
     const playerMove = React.useState(-1)
+
   
     const controlsDisabled = React.useState(["","","",""])
     const [endGameMessage, setEndGameMessage]= React.useState(<div></div>)
+    const gameOver = React.useState(false)
 
     function drawCard(){
         if (nextCard >= deck.length){
@@ -81,7 +84,11 @@ function CardGame(props){
             }
         }
 
+        if (statAry[0] < 0){
+            statAry[0] = 0
+        }
         statState[1](statAry)
+        return statAry[0]
 
     }
     function endPhase(){
@@ -109,32 +116,37 @@ function CardGame(props){
         
 
     }
-    function endGameCheck(){
-        if (opponentStats[0][0] <= 0 && stats[0][0] <= 0){
+    function endGameCheck(playerHealth, opponentHealth){
+        if (playerHealth <= 0 && opponentHealth <= 0){
             setEndGameMessage(<EndGameMessage message={"It was a tie"}/>)
             controlsDisabled[1](["-disabled","-disabled","-disabled","-disabled"])
+            return true
         }
-        if (opponentStats[0][0] <= 0 ){
+        if (opponentHealth <= 0 ){
             setEndGameMessage(<EndGameMessage message={"You Won!"}/>)
             controlsDisabled[1](["-disabled","-disabled","-disabled","-disabled"])
+            return true
         }
-        if (stats[0][0] <= 0){
+        if (playerHealth <= 0){
             setEndGameMessage(<EndGameMessage message={"Game Over"}/>)
             controlsDisabled[1](["-disabled","-disabled","-disabled","-disabled"])
+            return true
         }
         if((hand[0][0].suit + hand[0][1].suit + hand[0][2].suit + hand[0][3].suit + hand[0][4].suit) <= -5 ){
             
-            if (opponentStats[0][0] === stats[0][0]){
+            if (playerHealth === opponentHealth){
                 setEndGameMessage(<EndGameMessage message={"It was a tie"}/>)
             }
-            else if (opponentStats[0][0] < stats[0][0] ){
+            else if (opponentHealth < playerHealth ){
                 setEndGameMessage(<EndGameMessage message={"You Won!"}/>)
             }
             else {
                 setEndGameMessage(<EndGameMessage message={"Game Over"}/>)
             }
             controlsDisabled[1](["-disabled","-disabled","-disabled","-disabled"])
+            return true
         }
+        return false
     }
     /**
      * OPPONENT SELECT CARD
@@ -160,17 +172,32 @@ function CardGame(props){
         opponentHand[1](tempHand)
         //Sets the opponent's card slot to show the card they played
         opponentCard[1](selectedCard)
+
+
+        //sets the value of the cards being played according to if they match the wildcards in play
+        let tempPlayerCard = playerCard[0]
+        let tempOpponentCard = selectedCard
+
+        if (playerWildCard[0].suit > 0 && playerWildCard[0].value === playerCard[0].value){
+            tempPlayerCard = {"suit": playerCard[0].suit, "value": 13}
+        }
+        if (opponentWildCard[0].suit > 0 && opponentWildCard[0].value === selectedCard.value){
+            tempOpponentCard = {"suit": selectedCard.suit, "value": 13}
+        }
      
         //if the player moved first, we notify the server to end the turn
         if (phase[0] === moveFirst){
             if (playerMove[0] === 0){
-                socket.emit("end-phase-play-card", playerCard[0], selectedCard, pSocket)
+                socket.emit("end-phase-play-card", tempPlayerCard, tempOpponentCard, pSocket)
             }
             if (playerMove[0] === 1){
-                socket.emit("end-phase-play-face-down", playerCard[0], selectedCard, pSocket)
+                socket.emit("end-phase-play-face-down", tempPlayerCard, tempOpponentCard, pSocket)
             }
             if (playerMove[0] === 22){
-                socket.emit("end-phase-stack",  selectedCard, pSocket)
+                socket.emit("end-phase-stack",  tempOpponentCard, pSocket)
+            }
+            if (playerMove[0] === 3){
+                socket.emit("end-phase-wildcard", tempOpponentCard, pSocket)
             }
         } 
         //else the player is the defensive player, and we unluck the interface for them to play a card
@@ -238,94 +265,116 @@ function CardGame(props){
     })
 
     /**
+     * WILD CARD
+     * -This event indicates the opponent played wild card, and puts a blank slot in the opponent's hand 
+     * and adds the incoming card to the opponent's wildcard slot
+     */
+    socket.off("opponent-used-wildcard")
+    socket.on("opponent-used-wildcard", (index, selectedCard)=>{
+           // opponentCard[1]({"suit": -1, "value":0})
+        let tempHand = [...opponentHand[0]]
+        tempHand[index] = {"suit": -1, "value": 0}
+        opponentHand[1](tempHand)
+        opponentWildCard[1](selectedCard)
+        openToCounter()
+            
+    })
+
+    /**
      * END PHASE PLAY CARD
      * -Applys the direct damage or healing based on the cards used
      */
     socket.off("end-phase-play-card")
     socket.on("end-phase-play-card", (oneWhoTriggered, damage_heal)=>{
-        //console.log("end-phase-play-card: " + target + damage_heal)
-        /*
-        let statAry = [... stats[0]]
-        let opponentStatAry = [... opponentStats[0]]
+
+        let playerHealth = 1
+        let opponentHealth = 1
         if (oneWhoTriggered === 1){
-            statAry[0] += damage_heal[1]
-            opponentStatAry[0] -=  damage_heal[0]
+            playerHealth = changeStats(stats, 0, damage_heal[1], null)
+            opponentHealth =changeStats(opponentStats, damage_heal[0], 0, null)
         }
         else {
-            opponentStatAry[0] += damage_heal[1]
-            statAry[0] -= damage_heal[0]
-        }
-        stats[1](statAry)
-        opponentStats[1](opponentStatAry)
-        */
-        console.log(damage_heal)
-        if (oneWhoTriggered === 1){
-            changeStats(stats, 0, damage_heal[1], null)
-            changeStats(opponentStats, damage_heal[0], 0, null)
-        }
-        else {
-            changeStats(stats, damage_heal[0], 0, null)
-            changeStats(opponentStats, 0, damage_heal[1], null)
+            playerHealth = changeStats(stats, damage_heal[0], 0, null)
+            opponentHealth =changeStats(opponentStats, 0, damage_heal[1], null)
         }
 
-        endPhase()
+        let over = endGameCheck(playerHealth, opponentHealth)
+        gameOver[1](over)
+        if (!over){
+            endPhase()
+        }
         
     })
     socket.off("end-phase-play-face-down")
     socket.on("end-phase-play-face-down", (oneWhoTriggered, counters)=>{
-        console.log("end-phase-face-down" + oneWhoTriggered + " " + counters)
-        /*
-        let statAry = [... stats[0]]
-        let opponentStatAry = [... opponentStats[0]]
+        //console.log("end-phase-face-down" + oneWhoTriggered + " " + counters)
+        //console.log(counters)
+        let playerHealth = 1
+        let opponentHealth = 1
         if (oneWhoTriggered === 1){
-            statAry[4] += counters[4]
-            statAry[5] += counters[5]
-            statAry[6] += counters[6]
-            opponentStatAry[1] +=  counters[1]
-            opponentStatAry[2] +=  counters[2]
-            opponentStatAry[3] +=  counters[3]
+            playerHealth = changeStats(stats, 0, 0, [0,0,0,0,counters[4], counters[5], counters[6]])
+            opponentHealth = changeStats(opponentStats, 0, 0, [0,counters[1], counters[2], counters[3], 0,0,0])
         }
         else {
-            statAry[1] += counters[1]
-            statAry[2] += counters[2]
-            statAry[3] += counters[3]
-            opponentStatAry[4] +=  counters[4]
-            opponentStatAry[5] +=  counters[5]
-            opponentStatAry[6] +=  counters[6]
-        }
-        stats[1](statAry)
-        opponentStats[1](opponentStatAry)
-        */
-       console.log(counters)
-        if (oneWhoTriggered === 1){
-            changeStats(stats, 0, 0, [0,0,0,0,counters[4], counters[5], counters[6]])
-            changeStats(opponentStats, 0, 0, [0,counters[1], counters[2], counters[3], 0,0,0])
-        }
-        else {
-            changeStats(stats, 0, 0, [0,counters[1], counters[2], counters[3], 0,0,0])
-            changeStats(opponentStats, 0, 0,  [0,0,0,0,counters[4], counters[5], counters[6]])
+            playerHealth = changeStats(stats, 0, 0, [0,counters[1], counters[2], counters[3], 0,0,0])
+            opponentHealth = changeStats(opponentStats, 0, 0,  [0,0,0,0,counters[4], counters[5], counters[6]])
         }
 
-        endPhase()
+        let over = endGameCheck(playerHealth, opponentHealth)
+        gameOver[1](over)
+        if (!over){
+            endPhase()
+        }
+
         
     })
     socket.off("end-phase-stack")
     socket.on("end-phase-stack",(oneWhoTriggered, damage_heal)=>{
         
-        console.log(damage_heal)
+        let playerHealth = 1
+        let opponentHealth = 1
         if (oneWhoTriggered === 1){
-
-
-            changeStats(stats, damage_heal[0], 0, null)
-            changeStats(opponentStats, 0, damage_heal[1], null)
+            playerHealth = changeStats(stats, damage_heal[0], 0, null)
+            opponentHealth = changeStats(opponentStats, 0, damage_heal[1], null)
         }
         else {
-            changeStats(stats, 0, damage_heal[1], null)
-            changeStats(opponentStats, damage_heal[0], 0, null)
+            playerHealth = changeStats(stats, 0, damage_heal[1], null)
+            opponentHealth = changeStats(opponentStats, damage_heal[0], 0, null)
         }
-        endPhase()
-    })
+        let over = endGameCheck(playerHealth, opponentHealth)
+        gameOver[1](over)
+        if (!over){
+            endPhase()
+        }
 
+    })
+    socket.off("end-phase-wildcard")
+    socket.on("end-phase-wildcard",(oneWhoTriggered, damage_heal)=>{
+        
+        let playerHealth = 1
+        let opponentHealth = 1
+        if (oneWhoTriggered === 1){
+            playerHealth = changeStats(stats, damage_heal[0], 0, null)
+            opponentHealth = changeStats(opponentStats, 0, damage_heal[1], null)
+        }
+        else {
+            playerHealth = changeStats(stats, 0, damage_heal[1], null)
+            opponentHealth = changeStats(opponentStats, damage_heal[0], 0, null)
+        }
+        let over = endGameCheck(playerHealth, opponentHealth)
+        gameOver[1](over)
+        if (!over){
+            endPhase()
+        }
+
+    })
+    socket.off("opponent-disconnected")
+    socket.on("opponent-disconnected", ()=>{
+        if (!gameOver[0]){
+            setEndGameMessage(<EndGameMessage message={"Your Opponent Disconnected"}/>)
+            controlsDisabled[1](["-disabled","-disabled","-disabled","-disabled"])
+        }
+    })
     React.useEffect(() =>{
 
         console.log(deck)
@@ -350,10 +399,20 @@ function CardGame(props){
                 <Card card={opponentHand[0][3]} slot ={3} selectionState = {opponentCardSelection}/>
                 <Card card={opponentHand[0][4]} slot ={4} selectionState = {opponentCardSelection}/>
             </div>
-            <div className="game--opponent-active-card"></div>
+            <div className="game--opponent-active-card">
+                <div className="game--spacer"></div>
+                <div className="game--spacer"></div>
                 <Card card={opponentCard[0]} slot={5} selectionState = {opponentCardSelection}/>
-            <div className="game--player-active-card"></div>
+                <div className="game--spacer"></div>
+                <Card card={opponentWildCard[0]} slot ={6} selectionState = {opponentCardSelection}/>
+            </div>
+            <div className="game--player-active-card">
+                <Card card={playerWildCard[0]} slot ={6} selectionState = {playerCardSelection}/>
+                <div className="game--spacer"></div>
                 <Card card={playerCard[0]} slot={5} selectionState = {playerCardSelection}/>
+                <div className="game--spacer"></div>
+                <div className="game--spacer"></div>
+            </div>
             <div className="game--player-hand">
                 <Card card={hand[0][0]} slot ={0} selectionState = {playerCardSelection} socket={socket} opponentSocket={pSocket} playerMove={playerMove} activeCard={playerCard} hand={hand}/>
                 <Card card={hand[0][1]} slot ={1} selectionState = {playerCardSelection} socket={socket} opponentSocket={pSocket} playerMove={playerMove} activeCard={playerCard} hand={hand}/>
@@ -362,7 +421,7 @@ function CardGame(props){
                 <Card card={hand[0][4]} slot ={4} selectionState = {playerCardSelection} socket={socket} opponentSocket={pSocket} playerMove={playerMove} activeCard={playerCard} hand={hand}/>
             </div>
             <div className="game--player-moves"></div>
-                <GameControlsBar selectionState= {playerCardSelection} hand = {hand} playerCard={playerCard} socket={socket} opponentSocket={pSocket} disabled={controlsDisabled} playerMove={playerMove}/>
+                <GameControlsBar selectionState= {playerCardSelection} hand = {hand} playerCard={playerCard} wildCard ={playerWildCard} socket={socket} opponentSocket={pSocket} disabled={controlsDisabled} playerMove={playerMove}/>
             <div className="game--player-stats">
                 <GameStatsBar stats={stats}/>
             </div>

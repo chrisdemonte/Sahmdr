@@ -44,6 +44,28 @@
     height: 100%;
     font-family: 'Signika', sans-serif;
 }
+.landing-page{
+    text-align: center;
+    border-style: solid;
+    border-width: 5px;
+    border-width: .5vh;
+    border-color: antiquewhite;
+    border-radius: 30px;
+    background-color: #132138;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.landing-page--connected{
+    color:rgb(5, 164, 5)
+}
+.landing-page--not-connected{
+    color:rgb(164, 5, 5)
+}
+.landing-page--waiting{
+    color: goldenrod
+}
 .pick-suits--content{
     width: 30%;
     height: 100%;
@@ -295,7 +317,7 @@
     width: 20%;
     rotate: 180deg;
     margin-left: 10%;
-    margin-top: -20%;
+    margin-top: -25%;
     font-size: 1.5vh;
     
 }
@@ -548,7 +570,7 @@
 .game--player-hand {
     display: flex;
     
-    padding-right: 2.5%;
+    
     width: 60%;
     min-width: 60%;
     margin-left: 20%;
@@ -636,6 +658,31 @@
     -ms-user-select: none; /* IE10+/Edge */
     user-select: none; /* Standard */
 }
+
+.game--opponent-active-card{
+    display: flex;
+    width: 60%;
+    min-width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 1%;
+}
+.game--player-active-card{
+    display:flex;
+    width: 60%;
+    min-width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+
+    margin-bottom: 1%;
+}
+.game--spacer{
+    width:10.5vh ;
+    min-width: 10.5vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 .end-game{
     width: 100%;

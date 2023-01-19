@@ -5,10 +5,12 @@ function GameControlsBar(props){
     const [selection, setSelection]= props.selectionState
     const hand = props.hand 
     const [activeCard, setActiveCard] = props.playerCard
+    const [wildCard, setWildCard] = props.wildCard
     const socket= props.socket 
     const opponentSocket = props.opponentSocket
     const [disabled, setDisabled] = props.disabled
     const [playerMove, setPlayerMove] = props.playerMove
+   
 
  
     function onPlayCard(){
@@ -62,13 +64,27 @@ function GameControlsBar(props){
 
         socket.emit("used-stack-0", opponentSocket, selection, selectedCard)
     }
+    function onWildCard(){
+        if (selection < 0){
+            return
+        }
+        let selectedCard = hand[0][selection]
+        let tempHand = [...hand[0]]
+        tempHand[selection] = {"suit": -1, "value": 0}
+        hand[1](tempHand)
+        setPlayerMove(3)
+        setDisabled(["-disabled","-disabled","-disabled","-disabled"])
+        setWildCard(selectedCard)
+        socket.emit("used-wildcard", opponentSocket, selection, selectedCard)
+
+    }
 
     return (
         <div className="game--control-bar">
             <h2 className={"game--control" + disabled[0]} onClick={onPlayCard}> PLAY CARD</h2>
             <h2 className={"game--control" + disabled[1]} onClick={onPlayFaceDown}> PLAY FACE DOWN</h2>
             <h2 className={"game--control" + disabled[2]} onClick={onStack}> STACK</h2>
-            <h2 className={"game--control" + disabled[3]}> WILD CARD</h2>
+            <h2 className={"game--control" + disabled[3]} onClick={onWildCard}> WILD CARD</h2>
         </div>
     )
 }

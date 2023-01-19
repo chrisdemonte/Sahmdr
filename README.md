@@ -2,9 +2,7 @@
 
 Welcome to SAMHDR, a card game that is currently in developement and will eventually be hosted online so you can face players anywhere!
 
-(See "Playing SAMHDR" below)
-
-## Launching SAMHDR in Development App
+## Launching SAMHDR through the Development App
 
 SAMHDR was developed in JavaScript with a React front-end and a Node.JS back-end. To run this app locally you will need to have React, Node.JS, and Socket.IO installed on your system. You will also need the SAMHDR Server application found here: [SAMHDR Sever Repository](https://github.com/chrisdemonte/Samhdr-Server).
 
@@ -16,8 +14,6 @@ In this early stage of development you can play against yourself by openning two
 
 ## Playing SAMHDR
 
-(AS OF 1/18/2023: THE CARD GAME IS APPROACHING THE END OF ITS INITIAL DEVELOPMENT. PLAYERS CAN USE THE "PLAY CARD", "PLAY FACE DOWN", AND "STACK" MOVES DURING THEIR OFFENSIVE PHASE. DURING DEFENSIVE PHASE PLAYERS CAN USE "PLAY CARD". "WILD CARD" IS THE ONLY MOVE NOT IMPLEMENTED YET. THERE IS A WIN CONDITION WHEN PLAYERS RUN OUT OF CARDS OR THEIR HEALTH IS DEPLEATED, BUT IT DOESNT TRIGGER AT THE RIGHT TIME.)
-
 In the SAMHDR app, click the "Start Game" button in the navbar. 
 
 You start by entering your name and building your deck. There are six suits: Swords, Arrows, Magic, Healing, Defense, and Resistance. Like regular playing cards, each suit has 13 cards: 1 - 10, Jack, Queen, King. To learn more about the suits and the rules of the game click the "How to play" button in the app's navbar. 
@@ -26,9 +22,11 @@ Once you entered your player data, you enter a Player room. You can see all play
 
 ## Known Bugs
 
-- When entering your player data, if you enter your name after you select your three suits and the name entry is still active, the application may send a null string to the server. Without a name you do not appear in the player room. You can simply press "Start Game" again and re-enter your data, but be sure to enter your name before you select your suits. 
+-Please report any bugs to Samhdr's [issue page](https://github.com/chrisdemonte/Sahmdr/issues) or send an email to [samhdr.game@gmail.com](samhdr.game@gmail.com) for any other comments or issues. 
 
-- Win/Loss message does not trigger when health is depleated or the players run out of cards. This is due to React's asychronous state updates. The win/loss condition check is run before the health values update. 
+## Version History
+
+1/19/2023: Developement phase one. Implemented the landing page, how to play page, deck creation page, server room, and card game. Implemented the backend server. As of now the game is still private. Phase two is deployment and server security before a public release.
 
 # More about React
 

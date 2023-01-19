@@ -21,14 +21,13 @@ function PickRoom (props){
         
         playerListItems = []
         let player = null
-        //console.log("GE " + players)
-        //console.log("GR " + keys)
+
         for (let i = 0; i < keys.length; i++){
-            //console.log(i)
+           
             player = players[keys[i]]
             console.log(player)
             if (player.name.length > 0){
-                //console.log(players[i].name)
+           
                 let pName = player.name
                 let state = player.state
                 if (keys[i] === socket.id){
@@ -42,11 +41,8 @@ function PickRoom (props){
                     state = 3
                 }
                 console.log(state)
-                //rows.push(<div key={otherPlayers[i].id}>::: {otherPlayers[i].name} ::: Ready to play : {bool} :::</div>)
-                //rows.push(<PlayerListItem key={otherPlayers[i].id} pId={otherPlayers[i].id} self={name} name={pName} readyState={challengable} socket={socket}/> )
-                //let playerListItem = <PlayerListItem key={players[i].id} pId={players[i].id} self={name} name={pName} readyState={challengable} socket={socket}/> 
                 playerListItems.push(<PlayerListItem key={keys[i]} pId={keys[i]} self={name} pName={pName} readyState={state} socket={socket}/> )
-                //rows.push(playerListItem)
+          
             }
             else {
                 playerListItems.push(<div key={"blank-player-" + i}></div>)
@@ -70,37 +66,7 @@ function PickRoom (props){
             setChallengeState(<PlayerChallengeItem hasChallenges={false} />)
         }
     }
-    /*
-    function generateRoom(){
-        //let rows = []
-        playerListItems = []
-        let keys = players.keys()
-        
-        for (let i = 0; i < players.length; i++){
-            //console.log(i)
-            if (players[i].name.length > 0){
-                //console.log(players[i].name)
-                let pName = players[i].name
-                let challengable = players[i].state
-                if (players[i].id === socket.id){
-                    challengable = 0
-                    pName = pName + " (You)"
-                }
-                //rows.push(<div key={otherPlayers[i].id}>::: {otherPlayers[i].name} ::: Ready to play : {bool} :::</div>)
-                //rows.push(<PlayerListItem key={otherPlayers[i].id} pId={otherPlayers[i].id} self={name} name={pName} readyState={challengable} socket={socket}/> )
-                //let playerListItem = <PlayerListItem key={players[i].id} pId={players[i].id} self={name} name={pName} readyState={challengable} socket={socket}/> 
-                playerListItems.push(<PlayerListItem key={players[i].id} pId={players[i].id} self={name} name={pName} readyState={challengable} socket={socket}/> )
-                //rows.push(playerListItem)
-            }
-            else {
-                playerListItems.push(<div></div>)
-            }
-        }
-        
-        setRoomState(playerListItems)
 
-    }
-*/
     function generateDeck(deck){
         let cardNames = ["", "Swords", "Arrows", "Magic", "Healing", "Defense", "Resistance"]
         let suits = []
@@ -138,20 +104,15 @@ function PickRoom (props){
      */
     socket.off("room-data")
     socket.on("room-data", (players, keys) => {
-       // console.log("EH " + players)
-       // console.log("EH " + keys)
-      //  players = players
-      //  keys = keys
+
         generateRoom(players, keys)
         updateChallenges(players)
-        //console.log(players.length)
-
+     
     })
 
     socket.off("recieve-challenge")
     socket.on("recieve-challenge", (players)=>{
-       // console.log("recieved challenge")
-       // challenges.push({"name": pname, "id": pId})
+
         updateChallenges(players)
     })
 
@@ -160,17 +121,12 @@ function PickRoom (props){
       //  setLayout(<CardGame socket={socket.id} name={name} pName={opponentName} pSocket={opponentID} moveFirst={moveFirst} setLayout={setLayout}/>)
         
         var deck = []
-        
         generateDeck(deck)
-       // console.log("** After Deck Make ** ")
-      //  console.log(deck)
         shuffleDeck(deck)
         shuffleDeck(deck)
-       // console.log("** After Shuffle ** ")
-      //  console.log(deck)
+
         var hand = [deck[0],deck[1],deck[2],deck[3],deck[4]]
-      //  console.log("** After Draw Hand ** ")
-      //  console.log(hand)
+
         socket.off("room-data")
         socket.off("recieve-challenge")
         socket.off("challenge-denied")
@@ -183,25 +139,11 @@ function PickRoom (props){
     socket.on("challenge-denied", (opponentName, opponentID)=>{
         
     })
-    /*
-    socket.off("remove-challenger")
-    socket.on("remove-challenger", ()=>{
-        challenges.shift()
-        if (challenges.length > 0){
-            setChallengeState(<PlayerChallengeItem hasChallenge={true} name={name} pname={challenges[0].name} socket={socket} pSocket={challenges[0].id}/>)
-        }
-        else {
-            setChallengeState(<PlayerChallengeItem hasChallenge={false} name={name}  pname="" pSocket ="" socket={socket} />)
-        
-        }
-    })*/
-
 
     function serverReq(){
         socket.emit("join-room", name, 1)
-        
     }
-
+    
     /**
      * Called only once at the first render of the page
      */
