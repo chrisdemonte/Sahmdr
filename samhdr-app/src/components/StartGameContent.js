@@ -7,6 +7,9 @@ function StartGameContent(props){
     const socket = props.socket
     const serverStatusText = React.useState(<h2>Server Status: <span className="landing-page--waiting">Waiting...</span></h2>)
     
+    function severTest(){
+        socket.emit("message", "Testing the server connection")
+    }
     React.useEffect( () =>{
         setTimeout( ()=>{
            // console.log("polling server")
@@ -25,6 +28,7 @@ function StartGameContent(props){
             <div className="landing-page">
             <h1>Welcome to SAMHDR!</h1>
             {serverStatusText[0]}
+           
 
           
      
