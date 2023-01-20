@@ -9,7 +9,7 @@ var socket
 
 try {
   //socket = io('http://localhost:2020')
-  socket = io('http://3.84.112.144:2020')
+  socket = io('http://3.84.112.144:80')
 }
 catch (error){
   
