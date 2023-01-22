@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import io from 'socket.io-client';
-import pem from './ssl/samhdr-server-key.pem'
+
 
 //const filereader = new FileReader()
 //const key = filereader.readAsText('./ssl/samhdr-server-key.txt')
@@ -32,7 +32,7 @@ fetch(pem).then((r) => r.text()).then(
   )*/
 
 try {
-  socket = io('http://localhost:2020')//,{
+  socket = io('http://54.83.240.243:2020')//,{
  //  key: fs.readFileSync('../ssl/samhdr-server-key')})
   //  cert: reader.readAsText("../ssl/samhdr-cert.pem"),
   //  ca: [
