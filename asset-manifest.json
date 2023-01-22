@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Sahmdr/static/css/main.cf96dc80.css",
-    "main.js": "/Sahmdr/static/js/main.e61bce0f.js",
+    "main.js": "/Sahmdr/static/js/main.7f747fc2.js",
     "static/js/787.0031a336.chunk.js": "/Sahmdr/static/js/787.0031a336.chunk.js",
     "static/media/card_back_red.png": "/Sahmdr/static/media/card_back_red.f5e4719cbda7fc74d68c.png",
     "index.html": "/Sahmdr/index.html",
     "main.cf96dc80.css.map": "/Sahmdr/static/css/main.cf96dc80.css.map",
-    "main.e61bce0f.js.map": "/Sahmdr/static/js/main.e61bce0f.js.map",
+    "main.7f747fc2.js.map": "/Sahmdr/static/js/main.7f747fc2.js.map",
     "787.0031a336.chunk.js.map": "/Sahmdr/static/js/787.0031a336.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.cf96dc80.css",
-    "static/js/main.e61bce0f.js"
+    "static/js/main.7f747fc2.js"
   ]
 }
