@@ -15,7 +15,7 @@ function GameControlsBar(props){
  
     function onPlayCard(){
         
-        if (selection < 0){
+        if (selection < 0 || disabled[0] == "-disabled"){
             return
         }
         let selectedCard = hand[0][selection]
@@ -33,7 +33,7 @@ function GameControlsBar(props){
 
     function onPlayFaceDown(){
        
-        if (selection < 0){
+        if (selection < 0 || disabled[1] == "-disabled"){
             return
         }
         let selectedCard = {"suit": 0, "value": 0, "card": hand[0][selection]}
@@ -50,7 +50,7 @@ function GameControlsBar(props){
 
     function onStack(){
         
-        if (selection < 0){
+        if (selection < 0 || disabled[2] == "-disabled"){
             return
         }
         let selectedCard = hand[0][selection]
@@ -65,7 +65,7 @@ function GameControlsBar(props){
         socket.emit("used-stack-0", opponentSocket, selection, selectedCard)
     }
     function onWildCard(){
-        if (selection < 0){
+        if (selection < 0 || disabled[3] == "-disabled"){
             return
         }
         let selectedCard = hand[0][selection]
