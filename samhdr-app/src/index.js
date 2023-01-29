@@ -20,7 +20,7 @@ try {
   //    reader.readAsText("../ssl/samhdr-server-cert.pem")
   //  ]
  // });
- // socket = io('localhost:2020')
+  //socket = io('localhost:2020')
   //socket = io('samhdr-load-balancer-716332415.us-east-1.elb.amazonaws.com:2020')
 }
 catch (error){

@@ -4,6 +4,8 @@ import Card from "./Card.js"
 import GameStatsBar from "./GameStatsBar.js"
 import GameControlsBar from "./GameControlsBar.js"
 import EndGameMessage from "./EndGameMessage.js"
+import song from "../assets/SAMHDR_battle_2.mp3"
+import ReactAudioPlayer from "react-audio-player"
 
 function CardGame(props){
    
@@ -388,6 +390,7 @@ function CardGame(props){
 
     return (
 
+        <div className="game--outer">
         <div className="game">
             <div className="game--opponent-stats">
                 <GameStatsBar stats={opponentStats}/>
@@ -425,8 +428,13 @@ function CardGame(props){
             <div className="game--player-stats">
                 <GameStatsBar stats={stats}/>
             </div>
+            
             {endGameMessage}
         </div>
+        <ReactAudioPlayer className="game--music" src={song} autoPlay controls controlslist="play nodownload" loop={true} volume={0.5}/>
+        </div>
+        
+        
     )
     //return (<h1>Test</h1>)
 }
