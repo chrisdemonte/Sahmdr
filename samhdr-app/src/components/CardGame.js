@@ -4,7 +4,7 @@ import Card from "./Card.js"
 import GameStatsBar from "./GameStatsBar.js"
 import GameControlsBar from "./GameControlsBar.js"
 import EndGameMessage from "./EndGameMessage.js"
-import song from "../assets/SAMHDR_battle_2.mp3"
+import song from "../assets/SAMHDR_game_music.mp3"
 import ReactAudioPlayer from "react-audio-player"
 
 function CardGame(props){
