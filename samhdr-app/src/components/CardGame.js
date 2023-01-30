@@ -21,6 +21,7 @@ function CardGame(props){
     const selections = props.selections //an array with length 6 that has the suits selected from the pick suits page. 0 = not selected, 1 = selected
 
     const playerCardSelection= React.useState(-1) //which card from the hand was clicked last. 0 = not clicked, 1 = clicked
+    const playedCard = React.useState(-1) //stores data on the card slot of the card that has been played this round
     const opponentCardSelection = React.useState(-1) //which card from the opponent's hand was clicked last. 0 = not clicked, 1 = clicked
     const playerCard = React.useState({"suit": -1, "value" : 0}) //the player's active card from playing a move
     const opponentCard = React.useState({"suit": -1, "value" : 0}) //the opponent's active card from playing a move
@@ -54,10 +55,11 @@ function CardGame(props){
             }
         }*/
         let tempHand = [...hand[0]]
-        tempHand[playerCardSelection[0]] = deck[nextCard]
+        tempHand[playedCard[0]] = deck[nextCard]
         //hand[slot] = deck[nextCard]
         hand[1](tempHand)
         setNextCard((prev) => (prev + 1))
+        playedCard[1](-1)
     }
     function openToCounter(){
         controlsDisabled[1](["","-disabled","-disabled","-disabled"])
@@ -424,7 +426,7 @@ function CardGame(props){
                 <Card card={hand[0][4]} slot ={4} selectionState = {playerCardSelection} socket={socket} opponentSocket={pSocket} playerMove={playerMove} activeCard={playerCard} hand={hand}/>
             </div>
             <div className="game--player-moves"></div>
-                <GameControlsBar selectionState= {playerCardSelection} hand = {hand} playerCard={playerCard} wildCard ={playerWildCard} socket={socket} opponentSocket={pSocket} disabled={controlsDisabled} playerMove={playerMove}/>
+                <GameControlsBar selectionState= {playerCardSelection} hand = {hand} playerCard={playerCard} plyaedCard={playedCard} wildCard ={playerWildCard} socket={socket} opponentSocket={pSocket} disabled={controlsDisabled} playerMove={playerMove}/>
             <div className="game--player-stats">
                 <GameStatsBar stats={stats}/>
             </div>

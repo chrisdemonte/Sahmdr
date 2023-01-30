@@ -3,6 +3,7 @@ import React from 'react'
 function GameControlsBar(props){
     
     const [selection, setSelection]= props.selectionState
+    const [playedCard, setPlayedCard] = props.playedCard
     const hand = props.hand 
     const [activeCard, setActiveCard] = props.playerCard
     const [wildCard, setWildCard] = props.wildCard
@@ -21,8 +22,8 @@ function GameControlsBar(props){
         let selectedCard = hand[0][selection]
         let tempHand = [...hand[0]]
         tempHand[selection] = {"suit": -1, "value": 0}
-        
         hand[1](tempHand)
+        setPlayedCard(selection)
         setPlayerMove(0)
         setDisabled(["-disabled","-disabled","-disabled","-disabled"])
         setActiveCard(selectedCard)
@@ -39,8 +40,8 @@ function GameControlsBar(props){
         let selectedCard = {"suit": 0, "value": 0, "card": hand[0][selection]}
         let tempHand = [...hand[0]]
         tempHand[selection] = {"suit": -1, "value": 0}
-        
         hand[1](tempHand)
+        setPlayedCard(selection)
         setPlayerMove(1)
         setDisabled(["-disabled","-disabled","-disabled","-disabled"])
         setActiveCard(selectedCard)
@@ -58,6 +59,7 @@ function GameControlsBar(props){
         tempHand[selection] = {"suit": -1, "value": 0}
         
         hand[1](tempHand)
+        setPlayedCard(selection)
         setPlayerMove(2)
         setDisabled(["-disabled","-disabled","-disabled","-disabled"])
         setActiveCard(selectedCard)
@@ -72,6 +74,7 @@ function GameControlsBar(props){
         let tempHand = [...hand[0]]
         tempHand[selection] = {"suit": -1, "value": 0}
         hand[1](tempHand)
+        setPlayedCard(selection)
         setPlayerMove(3)
         setDisabled(["-disabled","-disabled","-disabled","-disabled"])
         setWildCard(selectedCard)
