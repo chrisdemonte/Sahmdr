@@ -13,14 +13,14 @@ import io from 'socket.io-client';
 var socket 
 
 try {
-  socket = io('http://54.83.240.243:2020')//,{
+ // socket = io('http://54.83.240.243:2020')//,{
  //  key: fs.readFileSync('../ssl/samhdr-server-key')})
   //  cert: reader.readAsText("../ssl/samhdr-cert.pem"),
   //  ca: [
   //    reader.readAsText("../ssl/samhdr-server-cert.pem")
   //  ]
  // });
-  //socket = io('localhost:2020')
+  socket = io('localhost:2020')
   //socket = io('samhdr-load-balancer-716332415.us-east-1.elb.amazonaws.com:2020')
 }
 catch (error){

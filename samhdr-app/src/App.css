@@ -12,8 +12,9 @@
 .navbar--options{
     list-style: none;
     display:inline-flex;
-    margin-left: 60%;
-    width: 40%;
+    margin-left: auto;
+    margin-right:2.5%;
+    width: 20%;
     
 }
 .navbar--options > li {
@@ -283,8 +284,10 @@
 }
 .card {
     
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
+    max-width: 135px;
+    max-height: 190px;
     border-radius: 10px;
     margin-bottom: 2%;
     margin-left: auto;
@@ -293,6 +296,8 @@
 .card:hover {
  
     border-color: goldenrod;
+    margin-left: auto;
+    margin-right: auto;
 }
 .card--inner{
     margin-top: 5%;
@@ -309,7 +314,8 @@
     margin-right: 10%;
     width: 20%;
     margin-top: -15%;
-    font-size: 1.5vh;
+    font-size: calc(min(1.5vh, 1.5vw));
+    
     
 }
 .card--bottom-num-container{
@@ -317,8 +323,8 @@
     width: 20%;
     rotate: 180deg;
     margin-left: 10%;
-    margin-top: -25%;
-    font-size: 1.5vh;
+    margin-top: calc(max(-2.5vh,-2.5vw));
+    font-size: calc(min(1.5vh, 1.5vw));
     
 }
 .card--num {
@@ -340,8 +346,10 @@
     margin-left:20%;
 }
 .card-suit--1{
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
+    max-width: 135px;
+    max-height: 190px;
     border-color: antiquewhite ;
     border-style: solid;
     border-width: 5px;
@@ -352,8 +360,10 @@
     color: #b00421;
 }
 .card-suit-0 {
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
+    max-width: 135px;
+    max-height: 190px;
     background-color: antiquewhite;
     border-color: antiquewhite ;
     border-style: solid;
@@ -366,8 +376,10 @@
 }
 .card-suit-0-selected {
 
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
+    max-width: 135px;
+    max-height: 190px;
     background-color: antiquewhite;
     border-color: #b00421;;
     border-style: solid;
@@ -383,8 +395,10 @@
     color: #b00421;
 }
 .card-suit-1 {
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
+    max-width: 135px;
+    max-height: 190px;
     background-color: antiquewhite;
     border-color: #b00421 ;
     border-style: solid;
@@ -392,8 +406,10 @@
     border-radius: 10px;
 }
 .card-suit-1-selected {
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
+    max-width: 135px;
+    max-height: 190px;
     background-color: #ffa0b0;
     border-color: #b00421 ;
     border-style: solid;
@@ -408,8 +424,10 @@
     color: #ff6003
 }
 .card-suit-2 {
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
+    max-width: 135px;
+    max-height: 190px;
     background-color: antiquewhite;
     border-color: #ff6003 ;
     border-style: solid;
@@ -417,8 +435,10 @@
     border-radius: 10px;
 }
 .card-suit-2-selected {
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
+    max-width: 135px;
+    max-height: 190px;
     background-color:  #ffbf9a;
     border-color: #ff6003 ;
     border-style: solid;
@@ -434,8 +454,10 @@
 
 }
 .card-suit-3 {
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
+    max-width: 135px;
+    max-height: 190px;
     background-color: antiquewhite;
     border-color: #ffb303 ;
     border-style: solid;
@@ -443,8 +465,10 @@
     border-radius: 10px;
 }
 .card-suit-3-selected {
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
+    max-width: 135px;
+    max-height: 190px;
     background-color:  #ffe88a;
     border-color: #ffb303 ;
     border-style: solid;
@@ -459,8 +483,10 @@
     color: #17ad00;
 }
 .card-suit-4 {
-    width:10.5vh;
+    width:10.5vw;
     height:15vh;
+    max-width: 135px;
+    max-height: 190px;
     background-color: antiquewhite;
     border-color: #17ad00 ;
     border-style: solid;
@@ -468,8 +494,10 @@
     border-radius: 10px;
 }
 .card-suit-4-selected {
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
+    max-width: 135px;
+    max-height: 190px;
     background-color:  #a7ff9a;
     border-color: #17ad00 ;
     border-style: solid;
@@ -484,8 +512,10 @@
     color: #034ec7;
 }
 .card-suit-5 {
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
+    max-width: 135px;
+    max-height: 190px;
     background-color: antiquewhite;
     border-color: #034ec7 ;
     border-style: solid;
@@ -493,8 +523,8 @@
     border-radius: 10px;
 }
 .card-suit-5-selected {
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
     background-color:  #9ac1ff;
     border-color: #034ec7 ;
     border-style: solid;
@@ -509,8 +539,10 @@
     color: #7836d4;
 }
 .card-suit-6 {
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
+    max-width: 135px;
+    max-height: 190px;
     background-color: antiquewhite;
     border-color: #7836d4 ;
     border-style: solid;
@@ -518,8 +550,10 @@
     border-radius: 10px;
 }
 .card-suit-6-selected {
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
+    max-width: 135px;
+    max-height: 190px;
     background-color:  #cdaafe ;
     border-color: #7836d4 ;
     border-style: solid;
@@ -533,8 +567,10 @@
 }
 
 .card--back{
-    width:10.5vh;
-    height:15vh;
+    width:10.5vw;
+    height:15vw;
+    max-width: 135px;
+    max-height: 190px;
     background-size: cover;
 }
 .test--card-display{
@@ -597,13 +633,14 @@
     margin-right: 5%;
     padding-left: 5%;
     padding-right: 5%;
-    font-size: 1.5vh;
+    font-size: 1.25vw;
 }
 .game--stat-img{
     height: 35px;
     width: 35px;
-    width: 3vh;
-    height: 3vh;
+    width: calc(min(3vw, 3vh));
+    height: calc(min(3vw, 3vh));
+    font-size: 2vw;
     margin-left: auto;
     margin-right: 1%;
 }
@@ -625,7 +662,7 @@
     width: 25%;
    
     text-align: center;
-    font-size: 2vh;
+    font-size: 2vw;
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
@@ -652,7 +689,7 @@
     border-width: .5vh;
     padding-top: .5%;
     padding-bottom: .5%;
-    font-size: 2vh;
+    font-size: 2vw;
     width: 25%;
     text-align: center;
     margin-left: auto;
@@ -682,8 +719,10 @@
     margin-bottom: 1%;
 }
 .game--spacer{
-    width:10.5vh ;
-    min-width: 10.5vh;
+    width:10.5vw ;
+   
+    max-width: 135px;
+    max-height: 190px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -708,6 +747,8 @@
     padding-bottom: .5%;
     text-align: center;
     font-size: 6vh;
+    margin-top: -5vh;
+    
 }
 .game--music{
     width: 40%;

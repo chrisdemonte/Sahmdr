@@ -405,7 +405,7 @@ function CardGame(props){
                 <Card card={opponentHand[0][4]} slot ={4} selectionState = {opponentCardSelection}/>
             </div>
             <div className="game--opponent-active-card">
-                <div className="game--spacer"></div>
+                <div className="game--spacer"><p1>Wild Card</p1></div>
                 <div className="game--spacer"></div>
                 <Card card={opponentCard[0]} slot={5} selectionState = {opponentCardSelection}/>
                 <div className="game--spacer"></div>
@@ -416,7 +416,7 @@ function CardGame(props){
                 <div className="game--spacer"></div>
                 <Card card={playerCard[0]} slot={5} selectionState = {playerCardSelection}/>
                 <div className="game--spacer"></div>
-                <div className="game--spacer"></div>
+                <div className="game--spacer"><p1>Wild Card</p1></div>
             </div>
             <div className="game--player-hand">
                 <Card card={hand[0][0]} slot ={0} selectionState = {playerCardSelection} socket={socket} opponentSocket={pSocket} playerMove={playerMove} activeCard={playerCard} hand={hand}/>
@@ -426,7 +426,7 @@ function CardGame(props){
                 <Card card={hand[0][4]} slot ={4} selectionState = {playerCardSelection} socket={socket} opponentSocket={pSocket} playerMove={playerMove} activeCard={playerCard} hand={hand}/>
             </div>
             <div className="game--player-moves"></div>
-                <GameControlsBar selectionState= {playerCardSelection} hand = {hand} playerCard={playerCard} plyaedCard={playedCard} wildCard ={playerWildCard} socket={socket} opponentSocket={pSocket} disabled={controlsDisabled} playerMove={playerMove}/>
+                <GameControlsBar selectionState= {playerCardSelection} hand = {hand} playerCard={playerCard} playedCard={playedCard} wildCard ={playerWildCard} socket={socket} opponentSocket={pSocket} disabled={controlsDisabled} playerMove={playerMove}/>
             <div className="game--player-stats">
                 <GameStatsBar stats={stats}/>
             </div>
