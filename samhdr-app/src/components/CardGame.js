@@ -19,6 +19,7 @@ function CardGame(props){
     const pName = props.pName   //opponent's name
     const moveFirst = props.moveFirst // either 0 or 1, picked randomly by the server. if 1, you move first on phase 1, if 0 you move first on phase 0 
     const selections = props.selections //an array with length 6 that has the suits selected from the pick suits page. 0 = not selected, 1 = selected
+    const volume = props.volume
 
     const playerCardSelection= React.useState(-1) //which card from the hand was clicked last. 0 = not clicked, 1 = clicked
     const playedCard = React.useState(-1) //stores data on the card slot of the card that has been played this round
@@ -433,7 +434,7 @@ function CardGame(props){
             
             {endGameMessage}
         </div>
-        <ReactAudioPlayer className="game--music" src={song} autoPlay controls controlslist="play nodownload" loop={true} volume={0.5}/>
+        <ReactAudioPlayer className="game--music" src={song} autoPlay loop={true} volume={volume[0]}/>
         </div>
         
         

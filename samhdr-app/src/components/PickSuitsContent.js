@@ -8,6 +8,7 @@ function PickSuitsContent(props){
     const socket = props.socket
     const setLayout = props.setLayout
     const [name, setName] = props.name
+    const volume = props.volume
     var suits = 0;
     var selections = [false,false,false,false,false,false]; 
     const [swordState, setSwordState] = React.useState(<h1 className="suit-button" onClick={toggleSwords}>Swords</h1>)
@@ -24,7 +25,7 @@ function PickSuitsContent(props){
         //Declaring the function inside this event handler so the name value is not a stale state when you press the start game button
         function startGame2(){
             if (suits === 3 && event.target.value.length > 0){
-                setLayout(<PickRoom setLayout={setLayout} socket={socket} name={event.target.value} selections={selections} />)
+                setLayout(<PickRoom setLayout={setLayout} socket={socket} name={event.target.value} selections={selections} volume={volume}/>)
             }
         }
         setNameEntryState(<input type="text" className="name-entry" onChange={nameEntryHandler} value={event.target.value}></input>)
@@ -110,7 +111,7 @@ function PickSuitsContent(props){
     
     function startGame(){
         if (suits === 3 && name.length > 0){
-            setLayout(<PickRoom setLayout={setLayout} socket={socket} name={name} selections={selections} />)
+            setLayout(<PickRoom setLayout={setLayout} socket={socket} name={name} selections={selections} volume={volume}/>)
         }
     }
 

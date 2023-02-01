@@ -11,6 +11,7 @@ function PickRoom (props){
     const setLayout = props.setLayout
     const name = props.name
     const selections = props.selections
+    const volume = props.volume
 
     const [challengeState, setChallengeState] = React.useState(<PlayerChallengeItem hasChallenges={false} />)
     var playerListItems = []
@@ -132,7 +133,7 @@ function PickRoom (props){
         socket.off("challenge-denied")
         socket.off("challenge-accepted")
     
-        setLayout(<CardGame setLayout={setLayout} socket={socket} name={name} pName={opponentName} pSocket={opponentID} moveFirst={moveFirst} deck={deck} hand={hand}/>)
+        setLayout(<CardGame setLayout={setLayout} socket={socket} name={name} pName={opponentName} pSocket={opponentID} moveFirst={moveFirst} deck={deck} hand={hand} volume={volume}/>)
     })
 
     socket.off("challenge-denied")

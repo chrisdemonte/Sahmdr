@@ -14,7 +14,7 @@
     display:inline-flex;
     margin-left: auto;
     margin-right:2.5%;
-    width: 20%;
+    width: 30%;
     
 }
 .navbar--options > li {
@@ -28,6 +28,7 @@
 .navbar--options > li:active {
     color: rgb(218, 97, 32);
 }
+
 
 .main{
     font-family: 'Signika Negative', sans-serif;
